@@ -10,9 +10,11 @@ interface Props {
   page: PageKey;
   title: string;
   description: string;
+  /** Show the contact section above the footer (off for legal pages). */
+  contact?: boolean;
 }
 
-const { lang, page, title, description } = Astro.props;
+const { lang, page, title, description, contact = true } = Astro.props;
 const site = Astro.site ?? new URL('https://www.christoph-sens.com');
 const canonical = new URL(routes[page][lang], site);
 ---
@@ -39,7 +41,7 @@ const canonical = new URL(routes[page][lang], site);
     <main>
       <slot />
     </main>
-    <Contact lang={lang} />
+    {contact && <Contact lang={lang} />}
     <Footer lang={lang} />
   </body>
 </html>

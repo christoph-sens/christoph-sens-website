@@ -1,5 +1,5 @@
 ---
-import { external, ui, type Lang } from '../i18n/ui';
+import { routes, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -13,8 +13,8 @@ const t = ui[lang].footer;
   <div class="container row">
     <span>© {new Date().getFullYear()} Christoph Sens · {t.tagline}</span>
     <span class="links">
-      <a href={external.impressum}>{t.impressum}</a>
-      <a href={external.datenschutz}>{t.datenschutz}</a>
+      <a href={routes.imprint[lang]}>{t.imprint}</a>
+      <a href={routes.privacy[lang]}>{t.privacy}</a>
     </span>
   </div>
 </footer>
