@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/portrait.jpg';
+import ArrowIcon from './ArrowIcon.astro';
+import { email, external, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].contact;
+---
+
+<section id="kontakt" class="section dark contact">
+  <div class="inner">
+    <span class="eyebrow">{t.eyebrow}</span>
+    <h2 class="title">{t.title}</h2>
+    <p class="text">{t.text}</p>
+    <div class="actions">
+      <a class="btn btn-accent" href={`mailto:${email[lang]}`}>{email[lang]}<ArrowIcon /></a>
+      <a class="btn btn-ghost-dark" href={external.github}>GitHub</a>
+    </div>
+    <figure class="person">
+      <Image
+        src={portrait}
+        alt={t.portraitAlt}
+        width={230}
+        densities={[1, 2]}
+        loading="lazy"
+      />
+      <figcaption>
+        <span class="name">Christoph Sens</span>
+        <span class="role">{t.role}</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: 128px 112px;
+  }
+
+  .inner {
+    max-width: 880px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(44px, 5.6vw, 76px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .text {
+    margin: 0;
+    max-width: 620px;
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--dark-muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .person {
+    margin: 32px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--dark-line);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .person img {
+    display: block;
+    width: 230px;
+    height: 288px;
+    object-fit: cover;
+    object-position: 50% 30%;
+    border-radius: var(--radius);
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--dark-muted);
+  }
+</style>

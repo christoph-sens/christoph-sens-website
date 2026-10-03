@@ -1,0 +1,97 @@
+---
+interface Props {
+  comment: string;
+}
+
+const { comment } = Astro.props;
+---
+
+<figure class="code-card">
+  <div class="bar">
+    <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+    <span class="file">OrderEvents.kt</span>
+  </div>
+  <pre><span class="tok-com">{comment}</span>
+<span class="tok-kw">val</span> extendedClient =
+    SqsExtendedClient(
+        sqsClient,
+        SqsExtendedClientConfig(
+            payloadStore = S3BackedPayloadStore(
+                s3Client,
+                bucketName = <span class="tok-str">"order-payloads"</span>,
+            ),
+        ),
+    )
+
+extendedClient.sendMessage(SendMessageRequest {"{"}
+    queueUrl = ordersQueue
+    messageBody = largePayload
+{"}"})</pre>
+  <figcaption>
+    <span>sqsoverflow · Open Source</span>
+    <span class="central">Maven Central</span>
+  </figcaption>
+</figure>
+
+<style>
+  .code-card {
+    flex: 1 1 460px;
+    min-width: 0;
+    margin: 0;
+    background: var(--dark);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(16, 20, 24, 0.45);
+  }
+
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--dark-line);
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #3a4249;
+  }
+
+  .file,
+  figcaption {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--dark-subtle);
+  }
+
+  pre {
+    margin: 0;
+    padding: 26px 24px 30px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.75;
+    color: #d8dee3;
+    overflow-x: auto;
+  }
+
+  figcaption {
+    padding: 14px 24px;
+    border-top: 1px solid var(--dark-line);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .central {
+    color: var(--accent-light);
+  }
+</style>

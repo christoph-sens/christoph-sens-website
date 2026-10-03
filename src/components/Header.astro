@@ -1,0 +1,139 @@
+---
+import { email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+
+const { lang, page } = Astro.props;
+const t = ui[lang];
+const other: Lang = lang === 'de' ? 'en' : 'de';
+const isStory = page === 'storyKotlin' || page === 'storyPdf';
+
+const links = [
+  { href: routes.home[lang], label: t.nav.home, active: page === 'home' },
+  { href: routes.services[lang], label: t.nav.services, active: page === 'services' },
+  { href: `${routes.home[lang]}#success-stories`, label: t.nav.stories, active: isStory },
+];
+---
+
+<header class="section header">
+  <nav class="container nav" aria-label={t.navLabel}>
+    <a href={routes.home[lang]} class="brand">
+      <span class="brand-mark" aria-hidden="true">cs</span>
+      <span class="brand-name">Christoph Sens</span>
+    </a>
+    <div class="nav-links">
+      {
+        links.map((l) => (
+          <a href={l.href} class:list={['nav-link', { active: l.active }]} aria-current={l.active ? 'page' : undefined}>
+            {l.label}
+          </a>
+        ))
+      }
+      <span class="lang" aria-label={t.langSwitchLabel}>
+        <span class="lang-current">{lang.toUpperCase()}</span>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <a href={routes[page][other]} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+      </span>
+      <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>{t.navCta}</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header {
+    padding-block: 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--ink);
+    color: var(--bg);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .nav-link.active {
+    color: var(--accent-hover);
+  }
+
+  .lang {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+
+  .lang > * {
+    padding: 12px 4px;
+  }
+
+  .lang-current {
+    font-weight: 500;
+  }
+
+  .lang-sep {
+    color: var(--dark-subtle);
+    padding-inline: 0;
+  }
+
+  .lang a {
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .nav-cta {
+    min-height: 44px;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+
+  @media (max-width: 760px) {
+    .nav-link {
+      display: none;
+    }
+  }
+</style>

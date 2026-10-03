@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 5 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    uses: christoph-sens/ci-workflows/.github/workflows/node-ci.yml@4558cd434b64221a062b172e7096eaa33ef0124f # v1.3.0
+    permissions:
+      contents: read
+      security-events: write # CodeQL results

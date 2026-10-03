@@ -1,0 +1,56 @@
+---
+import { routes, ui, type Lang } from '../i18n/ui';
+import { stories, type StoryKey } from '../data/stories';
+
+interface Props {
+  lang: Lang;
+  story: StoryKey;
+  dark?: boolean;
+}
+
+const { lang, story, dark = false } = Astro.props;
+const s = stories[story][lang];
+---
+
+<a href={routes[story][lang]} class:list={['card-link', 'story', dark ? 'card-dark' : 'card']}>
+  <span class="tags">{s.tags}</span>
+  <h3 class="h3">{s.title}</h3>
+  <p class="teaser">{s.teaser}</p>
+  <span class="more">{ui[lang].readMore}</span>
+</a>
+
+<style>
+  .story {
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .tags {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  .teaser {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--muted);
+    flex-grow: 1;
+  }
+
+  .more {
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .card-dark .tags,
+  .card-dark .more {
+    color: var(--accent-light);
+  }
+
+  .card-dark .teaser {
+    color: var(--dark-muted);
+  }
+</style>

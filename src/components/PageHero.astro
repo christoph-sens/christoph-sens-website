@@ -1,0 +1,71 @@
+---
+import { routes, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  eyebrow: string;
+  title: string;
+  lead: string;
+}
+
+const { lang, eyebrow, title, lead } = Astro.props;
+---
+
+<section class="section hero">
+  <div class="container stack inner">
+    <a class="back" href={routes.home[lang]}>← {ui[lang].back}</a>
+    <div class="kicker"><span class="dot" aria-hidden="true"></span>{eyebrow}</div>
+    <h1 class="title">{title}</h1>
+    <p class="lead">{lead}</p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: 56px 72px;
+  }
+
+  .inner {
+    gap: 28px;
+  }
+
+  .back {
+    align-self: flex-start;
+    padding: 10px 0;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  .title {
+    margin: 0;
+    max-width: 1040px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(44px, 5.4vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+  }
+
+  .lead {
+    max-width: 720px;
+  }
+</style>

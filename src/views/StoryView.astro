@@ -1,0 +1,294 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { nextStory, stories, type StoryKey } from '../data/stories';
+import { routes, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  story: StoryKey;
+}
+
+const { lang, story } = Astro.props;
+const s = stories[story][lang];
+const next = nextStory[story];
+const n = stories[next][lang];
+---
+
+<BaseLayout lang={lang} page={story} title={`Success Story: ${s.title} – Christoph Sens`} description={s.metaDescription}>
+  <PageHero lang={lang} eyebrow={`Success Story · ${s.tags}`} title={s.title} lead={s.lead} />
+
+  <section class="section pad-96">
+    <div class="container grid-auto">
+      {
+        s.glance.map(([label, text], i) => {
+          const dark = i === s.glance.length - 1;
+          return (
+            <div class:list={['glance', dark ? 'card-dark' : 'card']}>
+              <span class="eyebrow">{label}</span>
+              <p>{text}</p>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  {
+    s.facts && (
+      <section class="section pad-96">
+        <dl class="container facts">
+          {s.facts.map(([value, label]) => (
+            <div class="fact">
+              <dt>{value}</dt>
+              <dd>{label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )
+  }
+
+  <section class="section article">
+    <div class="container">
+      {
+        s.sections.map((sec) => (
+          <div class="row">
+            <div class="stack side">
+              <span class="eyebrow">{sec.eyebrow}</span>
+              <h2>{sec.title}</h2>
+            </div>
+            <div class="stack prose">
+              {sec.blocks.map((b) => {
+                switch (b.type) {
+                  case 'p':
+                    return <p set:html={b.html} />;
+                  case 'list':
+                    return (
+                      <ul class="arrow-list">
+                        {b.items.map((item) => (
+                          <li>
+                            <span set:html={item} />
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  case 'code':
+                    return (
+                      <figure class="code">
+                        <figcaption class="code-head">{b.file}</figcaption>
+                        <pre set:html={b.html} />
+                      </figure>
+                    );
+                  case 'split':
+                    return (
+                      <div class="grid-auto split" style="--min: 240px">
+                        <div class="card split-col">
+                          <span class="mono split-title">{b.left.title}</span>
+                          <ul>{b.left.items.map((i) => <li>{i}</li>)}</ul>
+                        </div>
+                        <div class="card-dark split-col">
+                          <span class="mono split-title">{b.right.title}</span>
+                          <ul>{b.right.items.map((i) => <li>{i}</li>)}</ul>
+                        </div>
+                      </div>
+                    );
+                  case 'chips':
+                    return <ul class="chips">{b.items.map((c) => <li>{c}</li>)}</ul>;
+                  case 'buttons':
+                    return (
+                      <div class="buttons">
+                        {b.items.map((btn) => (
+                          <a class="btn btn-ghost" href={btn.href}>
+                            {btn.label}
+                          </a>
+                        ))}
+                      </div>
+                    );
+                }
+              })}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section next">
+    <div class="container">
+      <a class="card card-link next-card" href={routes[next][lang]}>
+        <div class="stack next-copy">
+          <span class="mono next-tags">{ui[lang].nextStory} · {n.tags}</span>
+          <h3>{n.title}</h3>
+        </div>
+        <span class="next-more">{ui[lang].readMore}</span>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .pad-96 {
+    padding-block: 0 96px;
+  }
+
+  .glance {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .glance p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .glance.card-dark p {
+    color: #e3e7ea;
+  }
+
+  .facts {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact {
+    padding: 28px 24px 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .fact dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -0.02em;
+  }
+
+  .fact dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .article {
+    padding-block: 0 112px;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px 64px;
+    padding-block: 56px;
+    border-top: 1px solid var(--line);
+  }
+
+  .side {
+    flex: 1 1 260px;
+    min-width: 0;
+    max-width: 360px;
+    gap: 14px;
+  }
+
+  .side h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .prose {
+    flex: 999 1 560px;
+    min-width: 0;
+    max-width: 760px;
+    gap: 20px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink-2);
+  }
+
+  .prose p {
+    margin: 0;
+  }
+
+  .prose .code {
+    margin-block: 8px;
+  }
+
+  .split-col {
+    padding: 28px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .split-col ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16.5px;
+    line-height: 1.55;
+  }
+
+  .split-title {
+    font-size: 14px;
+    color: var(--subtle);
+  }
+
+  .card-dark .split-title {
+    color: var(--accent-light);
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .next {
+    padding-block: 0 128px;
+  }
+
+  .next-card {
+    padding: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .next-copy {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .next-tags {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  .next-card h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 28px;
+    letter-spacing: -0.015em;
+  }
+
+  .next-more {
+    font-weight: 600;
+    color: var(--accent);
+  }
+</style>

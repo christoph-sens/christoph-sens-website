@@ -1,0 +1,49 @@
+---
+import { external, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].footer;
+---
+
+<footer class="section dark footer">
+  <div class="container row">
+    <span>© {new Date().getFullYear()} Christoph Sens · {t.tagline}</span>
+    <span class="links">
+      <a href={external.impressum}>{t.impressum}</a>
+      <a href={external.datenschutz}>{t.datenschutz}</a>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: 32px;
+    border-top: 1px solid var(--dark-line);
+    color: var(--dark-subtle);
+    font-size: 14px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .links {
+    display: flex;
+    gap: 24px;
+  }
+
+  a {
+    color: #c5ccd2;
+  }
+
+  a:hover {
+    color: var(--accent-light);
+  }
+</style>

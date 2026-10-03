@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { servicesPage, technologies } from '../data/services';
+import { routes, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = servicesPage[lang];
+---
+
+<BaseLayout lang={lang} page="services" title={t.metaTitle} description={t.metaDescription}>
+  <PageHero lang={lang} eyebrow={t.eyebrow} title={t.title} lead={t.lead} />
+
+  <section class="section list">
+    <div class="container stack">
+      {
+        t.services.map((s, i) => (
+          <article class:list={['service', s.dark ? 'card-dark' : 'card']}>
+            <div class="stack copy">
+              <span class="eyebrow">{String(i + 1).padStart(2, '0')}</span>
+              <h2 class="h2 title">{s.title}</h2>
+              <p class="text">{s.text}</p>
+              {s.example && (
+                <a class="example" href={routes[s.example.story][lang]}>
+                  {s.example.label}
+                </a>
+              )}
+            </div>
+            <div class="stack tasks">
+              <span class="mono tasks-label">{t.tasksLabel}</span>
+              <ul class="arrow-list">
+                {s.tasks.map((task) => (
+                  <li>{task}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section tech">
+    <div class="container stack tech-inner">
+      <span class="eyebrow">{t.techLabel}</span>
+      <ul class="chips">
+        {technologies.map((tech) => <li>{tech}</li>)}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .list {
+    padding-block: 0 96px;
+  }
+
+  .list .container {
+    gap: 20px;
+  }
+
+  .service {
+    border-radius: 24px;
+    padding: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px 64px;
+  }
+
+  @media (max-width: 760px) {
+    .service {
+      padding: 32px 24px;
+    }
+  }
+
+  .copy,
+  .tasks {
+    flex: 1 1 320px;
+    min-width: 0;
+  }
+
+  .copy {
+    gap: 18px;
+  }
+
+  .title {
+    font-size: clamp(32px, 3.4vw, 40px);
+    line-height: 1.08;
+  }
+
+  .text {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .card-dark .text,
+  .card-dark .tasks-label {
+    color: var(--dark-muted);
+  }
+
+  .example {
+    align-self: flex-start;
+    padding: 8px 0;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .card-dark .example {
+    color: var(--accent-light);
+  }
+
+  .tasks {
+    gap: 16px;
+  }
+
+  .tasks-label {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .tasks .arrow-list {
+    gap: 14px;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .tech {
+    padding-block: 0 128px;
+  }
+
+  .tech-inner {
+    gap: 24px;
+    padding-top: 48px;
+    border-top: 1px solid var(--ink);
+  }
+</style>

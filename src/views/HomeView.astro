@@ -1,0 +1,365 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+import CodeCard from '../components/CodeCard.astro';
+import StoryCard from '../components/StoryCard.astro';
+import { homePage } from '../data/home';
+import { email, external, routes, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = homePage[lang];
+
+const icons = {
+  code: ['m8 7-5 5 5 5', 'm16 7 5 5-5 5', 'm14 4-4 16'],
+  cloud: ['M17.5 19H8a5 5 0 1 1 .9-9.9A6 6 0 0 1 20 11a4 4 0 0 1-2.5 8Z'],
+  spark: ['M12 3v3', 'M12 18v3', 'M3 12h3', 'M18 12h3', 'm5.6 5.6 2.1 2.1', 'm16.3 16.3 2.1 2.1', 'm5.6 18.4 2.1-2.1', 'm16.3 7.7 2.1-2.1'],
+};
+---
+
+<BaseLayout lang={lang} page="home" title={t.metaTitle} description={t.metaDescription}>
+  <!-- Hero -->
+  <section class="section hero">
+    <div class="container hero-row">
+      <div class="stack hero-copy">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span>{t.hero.eyebrow}</div>
+        <h1 class="display">{t.hero.title}</h1>
+        <p class="lead hero-lead">{t.hero.lead}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={`mailto:${email[lang]}`}>{t.hero.primary}<ArrowIcon /></a>
+          <a class="btn btn-ghost" href="#success-stories">{t.hero.secondary}</a>
+        </div>
+      </div>
+      <CodeCard comment={t.hero.codeComment} />
+    </div>
+  </section>
+
+  <!-- Facts -->
+  <section class="section">
+    <dl class="container facts">
+      {
+        t.facts.map(([value, label]) => (
+          <div class="fact">
+            <dt>{value}</dt>
+            <dd>{label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- Services -->
+  <section id="leistungen" class="section block">
+    <div class="container stack gap-56">
+      <div class="section-head">
+        <div class="stack gap-16 head-copy">
+          <span class="eyebrow">{t.services.eyebrow}</span>
+          <h2 class="h2">{t.services.title}</h2>
+        </div>
+        <p class="muted head-aside">{t.services.intro}</p>
+      </div>
+      <div class="grid-auto">
+        {
+          t.services.items.map((s) => (
+            <article class:list={['service', s.dark ? 'card-dark' : 'card']}>
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="icon">
+                {icons[s.icon].map((d) => <path d={d} />)}
+                {s.icon === 'spark' && <circle cx="12" cy="12" r="3" />}
+              </svg>
+              <h3 class="h3">{s.title}</h3>
+              <p class="service-text">{s.text}</p>
+              <ul class="mono bullets">
+                {s.bullets.map((b) => <li>→ {b}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+      <a class="text-link more-link" href={routes.services[lang]}>{t.services.more}</a>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="arbeitsweise" class="section block process">
+    <div class="container stack gap-64">
+      <div class="stack gap-16 process-head">
+        <span class="eyebrow">{t.process.eyebrow}</span>
+        <h2 class="h2">{t.process.title} <span class="title-muted">{t.process.titleMuted}</span></h2>
+      </div>
+      <ol class="steps" style="--min: 240px">
+        {
+          t.process.steps.map((s, i) => (
+            <li>
+              <span class="mono step-no">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <p class="muted">{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Open source -->
+  <section id="open-source" class="section block">
+    <div class="container stack gap-56">
+      <div class="section-head">
+        <div class="stack gap-16 head-copy wide">
+          <span class="eyebrow">{t.openSource.eyebrow}</span>
+          <h2 class="h2">{t.openSource.title}</h2>
+        </div>
+        <a class="btn btn-ghost" href={external.github}>{t.openSource.button}</a>
+      </div>
+      <p class="muted os-intro">{t.openSource.intro}</p>
+      <div class="grid-auto">
+        {
+          t.openSource.libs.map((lib) => (
+            <a class="card card-link lib" href={`${external.github}/${lib.name}`}>
+              <span class="mono lib-group">com.christoph-sens</span>
+              <h3 class="mono lib-name">{lib.name}</h3>
+              <p class="muted">{lib.text}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Success stories -->
+  <section id="success-stories" class="section stories">
+    <div class="container stack gap-56">
+      <div class="section-head">
+        <div class="stack gap-16 head-copy wide">
+          <span class="eyebrow">{t.stories.eyebrow}</span>
+          <h2 class="h2">{t.stories.title}</h2>
+        </div>
+        <a class="btn btn-ghost" href={external.successStories} hreflang="de">{t.stories.button}</a>
+      </div>
+      <div class="grid-auto" style="--min: 420px">
+        <StoryCard lang={lang} story="storyKotlin" dark />
+        <StoryCard lang={lang} story="storyPdf" />
+      </div>
+      <a class="text-link more-link" href={external.blog} hreflang="de">{t.stories.more}</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .stack.gap-16 { gap: 16px; }
+  .stack.gap-56 { gap: 56px; }
+  .stack.gap-64 { gap: 64px; }
+
+  .hero {
+    padding-block: 96px 88px;
+  }
+
+  .hero-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-copy {
+    flex: 1 1 560px;
+    min-width: 0;
+    gap: 32px;
+  }
+
+  .kicker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--accent);
+    flex: none;
+  }
+
+  .hero-lead {
+    max-width: 600px;
+  }
+
+  .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .facts {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .fact {
+    padding: 28px 24px 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .fact dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 40px;
+    letter-spacing: -0.02em;
+  }
+
+  .fact dd {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .block {
+    padding-block: 128px 112px;
+  }
+
+  .head-copy {
+    max-width: 720px;
+  }
+
+  .head-copy.wide {
+    max-width: 760px;
+  }
+
+  .head-aside {
+    margin: 0;
+    max-width: 400px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .service {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .icon {
+    color: var(--accent);
+  }
+
+  .card-dark .icon {
+    color: var(--accent-light);
+  }
+
+  .service-text {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .card-dark .service-text {
+    color: var(--dark-muted);
+  }
+
+  .bullets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13.5px;
+  }
+
+  .more-link {
+    margin-top: -24px;
+  }
+
+  .process {
+    padding-block: 112px;
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+  }
+
+  .process-head {
+    max-width: 860px;
+  }
+
+  .title-muted {
+    color: var(--subtle);
+  }
+
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    border-top: 1px solid var(--ink);
+  }
+
+  .steps li {
+    padding: 32px 28px 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step-no {
+    font-size: 14px;
+    color: var(--subtle);
+  }
+
+  .steps h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .steps p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .os-intro {
+    margin: -24px 0 0;
+    max-width: 760px;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .lib {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .lib-group {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  .lib-name {
+    margin: 0;
+    font-weight: 500;
+    font-size: 26px;
+  }
+
+  .lib p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .stories {
+    padding-block: 0 128px;
+  }
+</style>
