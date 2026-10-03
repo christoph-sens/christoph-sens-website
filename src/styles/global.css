@@ -99,6 +99,14 @@ a:hover {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min, 280px)), 1fr));
 }
 
+.grid-wide {
+  --min: 420px;
+}
+
+.grid-narrow {
+  --min: 240px;
+}
+
 .section-head {
   display: flex;
   flex-wrap: wrap;

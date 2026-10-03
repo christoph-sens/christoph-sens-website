@@ -19,10 +19,13 @@
     "astro": "^7.3.5"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "workerd": false,
+    "fsevents": false
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.147.0"
   }
 }

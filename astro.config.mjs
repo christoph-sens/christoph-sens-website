@@ -5,6 +5,13 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://www.christoph-sens.com',
   trailingSlash: 'always',
+  vite: {
+    build: {
+      // Emit every asset (e.g. small font subsets) as a file instead of a data: URI, so the
+      // Content-Security-Policy in public/_headers can stay at font-src/img-src 'self'.
+      assetsInlineLimit: 0,
+    },
+  },
   i18n: {
     locales: ['de', 'en'],
     defaultLocale: 'de',
