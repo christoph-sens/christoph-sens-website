@@ -4,7 +4,7 @@ import ArrowIcon from '../components/ArrowIcon.astro';
 import CodeCard from '../components/CodeCard.astro';
 import StoryCard from '../components/StoryCard.astro';
 import { homePage } from '../data/home';
-import { email, external, routes, type Lang } from '../i18n/ui';
+import { blogPath, email, external, routes, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -136,13 +136,13 @@ const icons = {
           <span class="eyebrow">{t.stories.eyebrow}</span>
           <h2 class="h2">{t.stories.title}</h2>
         </div>
-        <a class="btn btn-ghost" href={external.successStories} hreflang="de">{t.stories.button}</a>
+        <a class="btn btn-ghost" href={`${blogPath}#success-stories`} hreflang="de">{t.stories.button}</a>
       </div>
       <div class="grid-auto grid-wide">
         <StoryCard lang={lang} story="storyKotlin" dark />
         <StoryCard lang={lang} story="storyPdf" />
       </div>
-      <a class="text-link more-link" href={external.blog} hreflang="de">{t.stories.more}</a>
+      <a class="text-link more-link" href={`${blogPath}#fachartikel`} hreflang="de">{t.stories.more}</a>
     </div>
   </section>
 </BaseLayout>

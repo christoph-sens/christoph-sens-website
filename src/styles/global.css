@@ -64,6 +64,14 @@ img {
   height: auto;
 }
 
+/* Long German compounds (e.g. "Konfigurationsdateien") must not overflow narrow screens. */
+h1,
+h2,
+h3 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
 a {
   color: var(--ink);
 }
@@ -323,6 +331,94 @@ a:hover {
 
 .card-dark .arrow-list li::before {
   color: var(--accent-light);
+}
+
+/* ---------- long-form text (legal pages, blog posts) ---------- */
+
+.prose {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  overflow-wrap: anywhere;
+}
+
+.prose h2 {
+  margin: 56px 0 16px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose h3 {
+  margin: 32px 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin: 0 0 16px;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 22px;
+}
+
+.prose li > ul {
+  margin: 6px 0 0;
+}
+
+.prose hr {
+  margin: 48px 0 16px;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.prose em {
+  color: var(--muted);
+}
+
+.prose img {
+  display: block;
+  margin: 32px 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.prose pre {
+  margin: 24px 0;
+  padding: 22px 20px;
+  border-radius: 16px;
+  background: var(--dark);
+  color: #d8dee3;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: auto;
+  overflow-wrap: normal;
 }
 
 /* ---------- code ---------- */

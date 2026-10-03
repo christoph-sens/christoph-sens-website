@@ -1,0 +1,18 @@
+# Old Wix URLs → new pages (301). First match wins, so specific rules come before the catch-alls.
+
+# Success stories that have their own page
+/post/der-scan-befund-der-nie-verschwindet-wie-eine-ki-drei-aws-legacy-bibliotheken-an-einem-nachmittag  /success-stories/kotlin-extended-clients/  301
+/post/pdf-generierung-in-micro-service-landschaften-effektive-l%C3%B6sungen-f%C3%BCr-mehrsprachigkeit-und-lizenzfra  /success-stories/pdf-generierung/  301
+/post/pdf-generierung-in-micro-service-landschaften-effektive-lösungen-für-mehrsprachigkeit-und-lizenzfra  /success-stories/pdf-generierung/  301
+
+# Blog posts
+/post/success-story-erfolgreicher-technologiewechsel-wie-ein-medienkonzern-seine-app-entwicklung-umstell  /blog/technologiewechsel-medienkonzern/  301
+/post/automatische-generierung-von-bildschirmmasken-aus-konfigurationsdateien  /blog/bildschirmmasken-aus-konfigurationsdateien/  301
+/post/die-rolle-von-signals  /blog/die-rolle-von-signals/  301
+
+# Blog index and categories
+/blog/categories/success-story  /blog/#success-stories  301
+/blog/categories/blog  /blog/#fachartikel  301
+/blog/categories/*  /blog/  301
+/post/*  /blog/  301
+/blog-feed.xml  /blog/  301

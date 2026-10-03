@@ -19,6 +19,9 @@ export const routes: Record<PageKey, Record<Lang, string>> = {
   privacy: { de: '/datenschutz/', en: '/en/privacy-policy/' },
 };
 
+/** The blog exists in German only (no hreflang alternates). Posts live under this path. */
+export const blogPath = '/blog/';
+
 export const email: Record<Lang, string> = {
   de: 'kontakt@christoph-sens.com',
   en: 'contact@christoph-sens.com',
@@ -26,14 +29,12 @@ export const email: Record<Lang, string> = {
 
 export const external = {
   github: 'https://github.com/christoph-sens',
-  blog: 'https://www.christoph-sens.com/blog',
-  successStories: 'https://www.christoph-sens.com/blog/categories/success-story',
 };
 
 export const ui = {
   de: {
     navLabel: 'Hauptnavigation',
-    nav: { home: 'Startseite', services: 'Leistungen', stories: 'Success Stories' },
+    nav: { home: 'Startseite', services: 'Leistungen', stories: 'Success Stories', blog: 'Blog' },
     navCta: 'Projekt anfragen',
     back: 'Startseite',
     langSwitchLabel: 'Sprache',
@@ -58,7 +59,7 @@ export const ui = {
   },
   en: {
     navLabel: 'Main navigation',
-    nav: { home: 'Home', services: 'Services', stories: 'Success stories' },
+    nav: { home: 'Home', services: 'Services', stories: 'Success stories', blog: 'Blog (DE)' },
     navCta: 'Start a project',
     back: 'Home',
     langSwitchLabel: 'Language',

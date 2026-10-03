@@ -1,20 +1,24 @@
 ---
-import { email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+import { blogPath, email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  page: PageKey;
+  page?: PageKey;
+  /** URL of this page per language; a missing language links to that language's home page. */
+  alternates: Partial<Record<Lang, string>>;
 }
 
-const { lang, page } = Astro.props;
+const { lang, page, alternates } = Astro.props;
 const t = ui[lang];
 const other: Lang = lang === 'de' ? 'en' : 'de';
 const isStory = page === 'storyKotlin' || page === 'storyPdf';
+const isBlog = Astro.url.pathname.startsWith(blogPath);
 
 const links = [
   { href: routes.home[lang], label: t.nav.home, active: page === 'home' },
   { href: routes.services[lang], label: t.nav.services, active: page === 'services' },
   { href: `${routes.home[lang]}#success-stories`, label: t.nav.stories, active: isStory },
+  { href: blogPath, label: t.nav.blog, active: isBlog },
 ];
 ---
 
@@ -35,7 +39,7 @@ const links = [
       <span class="lang" aria-label={t.langSwitchLabel}>
         <span class="lang-current">{lang.toUpperCase()}</span>
         <span class="lang-sep" aria-hidden="true">/</span>
-        <a href={routes[page][other]} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+        <a href={alternates[other] ?? routes.home[other]} hreflang={other} lang={other}>{other.toUpperCase()}</a>
       </span>
       <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>{t.navCta}</a>
     </div>
