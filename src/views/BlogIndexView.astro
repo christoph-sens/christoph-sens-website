@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { blogEntries, formatDate } from '../data/blog';
+import { blogPath } from '../i18n/ui';
+
+const entries = await blogEntries();
+const sections = [
+  { id: 'success-stories', title: 'Success Stories', items: entries.filter((e) => e.category === 'success-story') },
+  { id: 'fachartikel', title: 'Fachartikel', items: entries.filter((e) => e.category === 'article') },
+];
+---
+
+<BaseLayout
+  lang="de"
+  path={blogPath}
+  title="Blog – Christoph Sens"
+  description="Success Stories und Fachartikel von Christoph Sens zu Kotlin, Java, AWS, Architektur und Softwareentwicklung."
+>
+  <PageHero
+    lang="de"
+    eyebrow="Blog"
+    title="Success Stories und Fachartikel"
+    lead="Aus echten Projekten: was die Aufgabe war, wie ich sie gelöst habe und was dabei herauskam."
+  />
+
+  {
+    sections.map((section) => (
+      <section id={section.id} class="section block">
+        <div class="container stack">
+          <h2 class="h2">{section.title}</h2>
+          <ul class="list">
+            {section.items.map((e) => (
+              <li>
+                <a class="card card-link entry" href={e.href}>
+                  <time class="mono date" datetime={e.date.toISOString().slice(0, 10)}>
+                    {formatDate(e.date)}
+                  </time>
+                  <h3 class="h3">{e.title}</h3>
+                  <p class="muted">{e.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>
+
+<style>
+  .block {
+    padding-block: 0 96px;
+  }
+
+  .block:last-of-type {
+    padding-bottom: 128px;
+  }
+
+  .stack {
+    gap: 32px;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 16px;
+  }
+
+  .entry {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .date {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  .entry p {
+    margin: 0;
+    line-height: 1.6;
+    max-width: 820px;
+  }
+</style>

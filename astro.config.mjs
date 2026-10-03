@@ -12,6 +12,10 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
   },
+  markdown: {
+    // Shiki highlights with inline style attributes, which the CSP (style-src 'self') blocks.
+    syntaxHighlight: false,
+  },
   i18n: {
     locales: ['de', 'en'],
     defaultLocale: 'de',

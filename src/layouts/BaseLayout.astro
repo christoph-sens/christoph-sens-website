@@ -7,16 +7,20 @@ import { languages, routes, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
-  page: PageKey;
+  /** Page with versions in all languages (see routes). */
+  page?: PageKey;
+  /** Path of a page that exists in this language only (e.g. German blog posts). */
+  path?: string;
   title: string;
   description: string;
   /** Show the contact section above the footer (off for legal pages). */
   contact?: boolean;
 }
 
-const { lang, page, title, description, contact = true } = Astro.props;
+const { lang, page, path, title, description, contact = true } = Astro.props;
 const site = Astro.site ?? new URL('https://www.christoph-sens.com');
-const canonical = new URL(routes[page][lang], site);
+const alternates: Partial<Record<Lang, string>> = page ? routes[page] : { [lang]: path };
+const canonical = new URL(alternates[lang] ?? '/', site);
 ---
 
 <!doctype html>
@@ -27,8 +31,11 @@ const canonical = new URL(routes[page][lang], site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(routes[page][l], site)} />)}
-    <link rel="alternate" hreflang="x-default" href={new URL(routes[page].de, site)} />
+    {
+      page &&
+        languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(routes[page][l], site)} />)
+    }
+    {page && <link rel="alternate" hreflang="x-default" href={new URL(routes[page].de, site)} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -37,7 +44,7 @@ const canonical = new URL(routes[page][lang], site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <Header lang={lang} page={page} />
+    <Header lang={lang} page={page} alternates={alternates} />
     <main>
       <slot />
     </main>
