@@ -89,7 +89,7 @@ const icons = {
         <span class="eyebrow">{t.process.eyebrow}</span>
         <h2 class="h2">{t.process.title} <span class="title-muted">{t.process.titleMuted}</span></h2>
       </div>
-      <ol class="steps" style="--min: 240px">
+      <ol class="steps">
         {
           t.process.steps.map((s, i) => (
             <li>
@@ -138,7 +138,7 @@ const icons = {
         </div>
         <a class="btn btn-ghost" href={external.successStories} hreflang="de">{t.stories.button}</a>
       </div>
-      <div class="grid-auto" style="--min: 420px">
+      <div class="grid-auto grid-wide">
         <StoryCard lang={lang} story="storyKotlin" dark />
         <StoryCard lang={lang} story="storyPdf" />
       </div>

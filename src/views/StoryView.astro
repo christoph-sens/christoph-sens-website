@@ -82,7 +82,7 @@ const n = stories[next][lang];
                     );
                   case 'split':
                     return (
-                      <div class="grid-auto split" style="--min: 240px">
+                      <div class="grid-auto grid-narrow split">
                         <div class="card split-col">
                           <span class="mono split-title">{b.left.title}</span>
                           <ul>{b.left.items.map((i) => <li>{i}</li>)}</ul>

@@ -20,3 +20,56 @@ jobs:
     permissions:
       contents: read
       security-events: write # CodeQL results
+
+  # Uploads the built site to Cloudflare Pages once CI is green: main → production, pull requests from
+  # this repository → preview URL (branch alias). Fork and Dependabot PRs have no access to the secrets
+  # and get no preview.
+  deploy:
+    needs: ci
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.head.repo.full_name == github.repository &&
+       github.actor != 'dependabot[bot]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: ${{ github.event_name == 'push' && 'production' || 'preview' }}
+      url: ${{ steps.deploy.outputs.url }}
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build
+        run: npm run build
+      # Idempotent: creates the Pages project on the first deployment only.
+      - name: Ensure Pages project exists
+        run: |
+          if ! npx wrangler pages project list --json | jq -e --arg p "$PROJECT" 'any(.[]; .["Project Name"] == $p)' > /dev/null; then
+            npx wrangler pages project create "$PROJECT" --production-branch main
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT: christoph-sens-website
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        run: |
+          output=$(npx wrangler pages deploy dist --project-name "$PROJECT" --branch "$BRANCH" \
+            --commit-hash "$GITHUB_SHA" --commit-message "$COMMIT_MESSAGE")
+          echo "$output"
+          url=$(grep -oE 'https://[a-z0-9.-]+\.pages\.dev' <<< "$output" | tail -n 1)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Deployed to $url" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT: christoph-sens-website
+          BRANCH: ${{ github.head_ref || github.ref_name }}
+          COMMIT_MESSAGE: ${{ github.event_name == 'push' && github.event.head_commit.message || github.event.pull_request.title }}
