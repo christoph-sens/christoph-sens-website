@@ -1,7 +1,7 @@
 export const languages = ['de', 'en'] as const;
 export type Lang = (typeof languages)[number];
 
-export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf';
+export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'imprint' | 'privacy';
 
 /** URL of every page in every language. Keeps the language switcher and hreflang links in sync. */
 export const routes: Record<PageKey, Record<Lang, string>> = {
@@ -15,6 +15,8 @@ export const routes: Record<PageKey, Record<Lang, string>> = {
     de: '/success-stories/pdf-generierung/',
     en: '/en/success-stories/pdf-generation/',
   },
+  imprint: { de: '/impressum/', en: '/en/legal-notice/' },
+  privacy: { de: '/datenschutz/', en: '/en/privacy-policy/' },
 };
 
 export const email: Record<Lang, string> = {
@@ -26,8 +28,6 @@ export const external = {
   github: 'https://github.com/christoph-sens',
   blog: 'https://www.christoph-sens.com/blog',
   successStories: 'https://www.christoph-sens.com/blog/categories/success-story',
-  impressum: 'https://www.christoph-sens.com/impressum',
-  datenschutz: 'https://www.christoph-sens.com/datenschutz',
 };
 
 export const ui = {
@@ -46,8 +46,12 @@ export const ui = {
     },
     footer: {
       tagline: 'Kotlin- und Java-Backends auf AWS',
-      impressum: 'Impressum',
-      datenschutz: 'Datenschutz',
+      imprint: 'Impressum',
+      privacy: 'Datenschutz',
+    },
+    legal: {
+      imprint: { title: 'Impressum', description: 'Impressum und Anbieterkennzeichnung von christoph-sens.com.' },
+      privacy: { title: 'Datenschutzerklärung', description: 'Datenschutzerklärung von christoph-sens.com: Hosting, E-Mail, Server-Logs und Ihre Rechte.' },
     },
     readMore: 'Weiterlesen →',
     nextStory: 'Nächste Success Story',
@@ -67,8 +71,12 @@ export const ui = {
     },
     footer: {
       tagline: 'Kotlin and Java backends on AWS',
-      impressum: 'Legal notice',
-      datenschutz: 'Privacy policy',
+      imprint: 'Legal notice',
+      privacy: 'Privacy policy',
+    },
+    legal: {
+      imprint: { title: 'Legal notice', description: 'Legal notice (Impressum) of christoph-sens.com.' },
+      privacy: { title: 'Privacy policy', description: 'Privacy policy of christoph-sens.com: hosting, email, server logs and your rights.' },
     },
     readMore: 'Read more →',
     nextStory: 'Next success story',
