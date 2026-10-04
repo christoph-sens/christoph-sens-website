@@ -1,4 +1,4 @@
-*Esta es una traducción de cortesía. Solo la [versión en alemán](/datenschutz/) es jurídicamente vinculante.*
+*Esta es una traducción de cortesía. Solo la [versión en alemán](/de/datenschutz/) es jurídicamente vinculante.*
 
 ## 1. Resumen sobre protección de datos
 

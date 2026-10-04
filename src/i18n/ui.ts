@@ -1,26 +1,28 @@
-export const languages = ['de', 'en', 'es'] as const;
+/** The first language is the default: it is served without a path prefix and is the hreflang x-default. */
+export const languages = ['en', 'de', 'es'] as const;
+export const defaultLang = languages[0];
 export type Lang = (typeof languages)[number];
 
 export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'blog' | 'imprint' | 'privacy';
 
 /** URL of every page in every language. Keeps the language switcher and hreflang links in sync. */
 export const routes: Record<PageKey, Record<Lang, string>> = {
-  home: { de: '/', en: '/en/', es: '/es/' },
-  services: { de: '/leistungen/', en: '/en/services/', es: '/es/servicios/' },
+  home: { en: '/', de: '/de/', es: '/es/' },
+  services: { en: '/services/', de: '/de/leistungen/', es: '/es/servicios/' },
   storyKotlin: {
-    de: '/success-stories/kotlin-extended-clients/',
-    en: '/en/success-stories/kotlin-extended-clients/',
+    en: '/success-stories/kotlin-extended-clients/',
+    de: '/de/success-stories/kotlin-extended-clients/',
     es: '/es/casos-de-exito/kotlin-extended-clients/',
   },
   storyPdf: {
-    de: '/success-stories/pdf-generierung/',
-    en: '/en/success-stories/pdf-generation/',
+    en: '/success-stories/pdf-generation/',
+    de: '/de/success-stories/pdf-generierung/',
     es: '/es/casos-de-exito/generacion-de-pdf/',
   },
   /** Blog index; posts live at <blog path><slug>/. */
-  blog: { de: '/blog/', en: '/en/blog/', es: '/es/blog/' },
-  imprint: { de: '/impressum/', en: '/en/legal-notice/', es: '/es/aviso-legal/' },
-  privacy: { de: '/datenschutz/', en: '/en/privacy-policy/', es: '/es/politica-de-privacidad/' },
+  blog: { en: '/blog/', de: '/de/blog/', es: '/es/blog/' },
+  imprint: { en: '/legal-notice/', de: '/de/impressum/', es: '/es/aviso-legal/' },
+  privacy: { en: '/privacy-policy/', de: '/de/datenschutz/', es: '/es/politica-de-privacidad/' },
 };
 
 export const email: Record<Lang, string> = {

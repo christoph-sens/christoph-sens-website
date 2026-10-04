@@ -1,4 +1,4 @@
-*This is a translation for convenience. The [German version](/datenschutz/) is legally binding.*
+*This is a translation for convenience. The [German version](/de/datenschutz/) is legally binding.*
 
 ## 1. Privacy at a glance
 

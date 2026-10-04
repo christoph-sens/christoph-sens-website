@@ -3,7 +3,7 @@ import { postSlug, postsIn } from '../../data/blog';
 import PostView from '../../views/PostView.astro';
 
 export async function getStaticPaths() {
-  const posts = await postsIn('de');
+  const posts = await postsIn('en');
   return posts.map((post) => ({ params: { slug: postSlug(post) }, props: { post } }));
 }
 
