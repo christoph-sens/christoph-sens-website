@@ -170,4 +170,79 @@ export const homePage: Record<Lang, HomePage> = {
       more: 'More articles on the blog →',
     },
   },
+  es: {
+    metaTitle: 'Christoph Sens – Kotlin, Java y Spring Boot sobre AWS',
+    metaDescription:
+      'Ingeniero backend freelance para Kotlin, Java, Spring Boot y AWS. Con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad – con más de 15 años de experiencia.',
+    hero: {
+      eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
+      title: 'Backends que mantienen la calma bajo carga.',
+      lead: 'Desarrollo backends en Kotlin y Java con Spring Boot sobre AWS – con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad. Con más de 15 años de experiencia.',
+      primary: 'Concertar una primera llamada',
+      secondary: 'Ver casos de éxito',
+      codeComment: '// ¿Payloads grandes? Van a S3 automáticamente.',
+    },
+    facts: [
+      ['15+', 'años de experiencia en backend'],
+      ['Kotlin y Java', 'en casa en la JVM con Spring Boot'],
+      ['AWS', 'SQS, SNS, S3 y más'],
+      ['3 librerías', 'open source en Maven Central'],
+    ],
+    services: {
+      eyebrow: '01 — Servicios',
+      title: 'Del primer borrador a una operación estable.',
+      intro: 'Me incorporo allí donde su equipo necesita refuerzo – como desarrollador, como arquitecto o como ambos.',
+      items: [
+        {
+          icon: 'code',
+          title: 'Desarrollo backend',
+          text: 'Servicios robustos en Kotlin y Java: APIs limpias, modelos de datos bien pensados y tests que realmente protegen algo.',
+          bullets: ['Servicios Spring Boot y APIs REST', 'Modernización de Java a Kotlin', 'Automatización de tests'],
+        },
+        {
+          icon: 'cloud',
+          title: 'Arquitectura en AWS',
+          text: 'Sistemas orientados a eventos que escalan y siguen siendo asequibles – con mensajería, almacenamiento e infraestructura como código.',
+          bullets: ['SQS, SNS y S3', 'Arquitectura orientada a eventos', 'Revisiones de arquitectura'],
+        },
+        {
+          icon: 'spark',
+          title: 'Desarrollo con apoyo de IA',
+          text: 'Uso la IA donde aporta velocidad – y mantengo en mis manos la arquitectura, la revisión del código y la responsabilidad.',
+          bullets: ['Software funcionando antes', 'Cada línea revisada por una persona', 'Flujos de trabajo con IA para su equipo'],
+          dark: true,
+        },
+      ],
+      more: 'Todos los servicios en detalle →',
+    },
+    process: {
+      eyebrow: '02 — Forma de trabajar',
+      title: 'IA para la velocidad.',
+      titleMuted: 'Una persona para la responsabilidad.',
+      steps: [
+        { title: 'Primera llamada', text: 'Aclaramos objetivos, punto de partida y marco – de forma concreta y sin compromiso.' },
+        { title: 'Análisis y arquitectura', text: 'Reviso el código y la infraestructura y propongo un camino claro.' },
+        { title: 'Implementación', text: 'En iteraciones cortas, con resultados visibles y una revisión cuidadosa.' },
+        { title: 'Traspaso', text: 'Documentado y comprensible, para que su equipo pueda continuar de forma autónoma.' },
+      ],
+    },
+    openSource: {
+      eyebrow: '03 — Open Source',
+      title: 'Código que puede revisar antes de contratarme.',
+      button: 'Todos los proyectos en GitHub',
+      intro:
+        'Extended clients para aws-sdk-kotlin: trasladan automáticamente los mensajes grandes de SQS y SNS a S3 – derivados de las librerías Java de AWS, creados para Kotlin y corrutinas.',
+      libs: [
+        { name: 's3overflow', text: 'La base: un payload store en S3 sobre el que se construyen los demás clientes.' },
+        { name: 'sqsoverflow', text: 'Extended client para Amazon SQS – los mensajes que superan el límite pasan a S3 de forma transparente.' },
+        { name: 'snsoverflow', text: 'Extended client para Amazon SNS – combinable con sqsoverflow en escenarios de fan-out.' },
+      ],
+    },
+    stories: {
+      eyebrow: '04 — Casos de éxito',
+      title: 'Resultados de proyectos reales.',
+      button: 'Todos los casos de éxito',
+      more: 'Más artículos en el blog →',
+    },
+  },
 };

@@ -29,15 +29,13 @@ export const postHref = (post: Post) => `${routes.blog[postLang(post)]}${postSlu
 
 export const postsIn = async (lang: Lang) => (await getCollection('blog')).filter((post) => postLang(post) === lang);
 
-/** URL of the post in every language. Fails the build if a translation link points nowhere. */
+/** URL of the post in every language. Fails the build if a language version is missing. */
 export async function postAlternates(post: Post): Promise<Record<Lang, string>> {
   const all = await getCollection('blog');
-  const lang = postLang(post);
   const entries = languages.map((l) => {
-    if (l === lang) return [l, postHref(post)];
-    const translation = all.find((p) => p.id === `${l}/${post.data.translation}`);
-    if (!translation) throw new Error(`Blog post ${post.id}: no ${l} translation "${post.data.translation}"`);
-    return [l, postHref(translation)];
+    const version = all.find((p) => postLang(p) === l && p.data.key === post.data.key);
+    if (!version) throw new Error(`Blog post ${post.id}: no ${l} version with key "${post.data.key}"`);
+    return [l, postHref(version)];
   });
   return Object.fromEntries(entries);
 }

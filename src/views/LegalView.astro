@@ -6,6 +6,8 @@ import ImpressumDe from '../legal/impressum.de.md';
 import ImpressumEn from '../legal/impressum.en.md';
 import DatenschutzDe from '../legal/datenschutz.de.md';
 import DatenschutzEn from '../legal/datenschutz.en.md';
+import ImpressumEs from '../legal/impressum.es.md';
+import DatenschutzEs from '../legal/datenschutz.es.md';
 
 interface Props {
   lang: Lang;
@@ -15,8 +17,8 @@ interface Props {
 const { lang, page } = Astro.props;
 const t = ui[lang].legal[page];
 const Content = {
-  imprint: { de: ImpressumDe, en: ImpressumEn },
-  privacy: { de: DatenschutzDe, en: DatenschutzEn },
+  imprint: { de: ImpressumDe, en: ImpressumEn, es: ImpressumEs },
+  privacy: { de: DatenschutzDe, en: DatenschutzEn, es: DatenschutzEs },
 }[page][lang];
 ---
 

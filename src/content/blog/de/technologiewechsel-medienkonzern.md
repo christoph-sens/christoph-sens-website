@@ -3,7 +3,7 @@ title: 'Erfolgreicher Technologiewechsel: Wie ein Medienkonzern seine App-Entwic
 description: 'Wie ein großer Medienkonzern seine App-Entwicklung mit Flutter auf eine gemeinsame Technologiebasis stellte und ins Haus holte.'
 date: 2024-04-19
 updated: 2024-04-22
-translation: media-group-technology-switch
+key: technologiewechsel-medienkonzern
 category: success-story
 tags: [Flutter, App-Entwicklung, Migration, Migrationsstrategie]
 ---

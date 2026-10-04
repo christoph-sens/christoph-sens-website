@@ -98,4 +98,40 @@ export const servicesPage: Record<Lang, ServicesPage> = {
       },
     ],
   },
+  es: {
+    metaTitle: 'Servicios – Christoph Sens',
+    metaDescription:
+      'Desarrollo backend con Kotlin y Java, arquitectura en AWS, modernización de sistemas existentes y desarrollo con apoyo de IA – por Christoph Sens.',
+    eyebrow: 'Servicios',
+    title: 'Desarrollo backend revisado y funcionando en producción.',
+    lead: 'Kotlin, Java y AWS – con IA para la velocidad y un ingeniero experimentado para la arquitectura, la revisión y la responsabilidad. Apoyo a su equipo allí donde necesita refuerzo en este momento.',
+    tasksLabel: 'Tareas típicas',
+    techLabel: 'Tecnologías',
+    services: [
+      {
+        title: 'Desarrollo backend con Kotlin y Java',
+        text: 'Nuevos servicios y ampliaciones de sistemas existentes – con interfaces limpias, modelos de datos bien pensados y tests que realmente protegen algo.',
+        tasks: ['Nuevos microservicios y APIs REST', 'Spring Boot, Spring Data e Hibernate', 'Bases de datos como PostgreSQL', 'Automatización de tests con JUnit, Testcontainers y Rest Assured'],
+        example: { label: 'Ejemplo: generación de PDF en entornos de microservicios →', story: 'storyPdf' },
+      },
+      {
+        title: 'AWS y arquitectura orientada a eventos',
+        text: 'Los sistemas que se comunican mediante colas y topics escalan bien – si los detalles son correctos. Diseño y construyo este tipo de soluciones en AWS.',
+        tasks: ['Mensajería con Amazon SQS y SNS', 'Trasladar mensajes grandes a S3 (patrón claim-check)', 'Integración con entornos AWS existentes', 'Tests de integración contra un emulador local de AWS'],
+        example: { label: 'Ejemplo: extended clients para Kotlin →', story: 'storyKotlin' },
+      },
+      {
+        title: 'Modernización de sistemas existentes',
+        text: 'Actualizar sistemas antiguos paso a paso sin poner en riesgo la operación – con decisiones claras en lugar de una traducción mecánica.',
+        tasks: ['Migrar código Java a Kotlin', 'Sustituir dependencias con avisos de seguridad', 'Revisión de licencias de las librerías utilizadas', 'Validar la elección tecnológica con prototipos'],
+      },
+      {
+        title: 'Desarrollo con apoyo de IA',
+        text: 'La IA escribe código rápido. Revisar, decidir y asumir la responsabilidad le corresponde a una persona. Justo ese reparto es lo que aporto a su proyecto.',
+        tasks: ['La IA escribe código, tests y boilerplate según especificaciones claras', 'Yo defino la arquitectura y reviso cada cambio', 'Revisión de licencias, tests y publicaciones trazables', 'Introducir flujos de trabajo con IA en su equipo'],
+        example: { label: 'Ejemplo: tres librerías desarrolladas con apoyo de IA →', story: 'storyKotlin' },
+        dark: true,
+      },
+    ],
+  },
 };

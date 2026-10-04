@@ -3,7 +3,7 @@ title: 'The role of Signals'
 description: 'Why Angular introduced Signals and how they differ from Observables.'
 date: 2024-04-19
 updated: 2024-12-21
-translation: die-rolle-von-signals
+key: die-rolle-von-signals
 category: article
 tags: [Angular, Signals]
 ---

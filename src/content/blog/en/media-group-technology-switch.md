@@ -3,7 +3,7 @@ title: 'A successful technology switch: how a media group changed its app develo
 description: 'How a large media group put its app development on a common technology base with Flutter and brought it in-house.'
 date: 2024-04-19
 updated: 2024-04-22
-translation: technologiewechsel-medienkonzern
+key: technologiewechsel-medienkonzern
 category: success-story
 tags: [Flutter, App development, Migration, Migration strategy]
 ---

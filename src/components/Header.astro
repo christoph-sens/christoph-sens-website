@@ -1,5 +1,5 @@
 ---
-import { email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+import { email, languages, routes, ui, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -10,7 +10,6 @@ interface Props {
 
 const { lang, page, alternates } = Astro.props;
 const t = ui[lang];
-const other: Lang = lang === 'de' ? 'en' : 'de';
 const isStory = page === 'storyKotlin' || page === 'storyPdf';
 const isBlog = Astro.url.pathname.startsWith(routes.blog[lang]);
 
@@ -37,9 +36,18 @@ const links = [
         ))
       }
       <span class="lang" aria-label={t.langSwitchLabel}>
-        <span class="lang-current">{lang.toUpperCase()}</span>
-        <span class="lang-sep" aria-hidden="true">/</span>
-        <a href={alternates[other] ?? routes.home[other]} hreflang={other} lang={other}>{other.toUpperCase()}</a>
+        {
+          languages.map((l, i) => (
+            <>
+              {i > 0 && <span class="lang-sep" aria-hidden="true">/</span>}
+              {l === lang ? (
+                <span class="lang-current">{l.toUpperCase()}</span>
+              ) : (
+                <a href={alternates[l] ?? routes.home[l]} hreflang={l} lang={l}>{l.toUpperCase()}</a>
+              )}
+            </>
+          ))
+        }
       </span>
       <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>{t.navCta}</a>
     </div>
