@@ -64,12 +64,21 @@ img {
   height: auto;
 }
 
-/* Long German compounds (e.g. "Konfigurationsdateien") must not overflow narrow screens. */
+/* Headings break only at soft hyphens on wide screens (auto hyphenation split "ru-hig" at 1024px).
+   Long German compounds (e.g. "Konfigurationsdateien") must not overflow narrow screens. */
 h1,
 h2,
 h3 {
-  hyphens: auto;
+  hyphens: manual;
   overflow-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  h1,
+  h2,
+  h3 {
+    hyphens: auto;
+  }
 }
 
 a {
