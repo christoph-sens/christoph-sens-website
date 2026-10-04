@@ -21,20 +21,20 @@ export interface HomePage {
 
 export const homePage: Record<Lang, HomePage> = {
   de: {
-    metaTitle: 'Christoph Sens – Kotlin- und Java-Backends auf AWS',
+    metaTitle: 'Christoph Sens – Kotlin, Java & Spring Boot auf AWS',
     metaDescription:
-      'Freelance Backend Engineer für Kotlin, Java und AWS. KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung – mit über 15 Jahren Erfahrung.',
+      'Freelance Backend Engineer für Kotlin, Java, Spring Boot und AWS. KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung – mit über 15 Jahren Erfahrung.',
     hero: {
-      eyebrow: 'Freelance Backend Engineer · Kotlin · Java · AWS',
+      eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends, die unter Last ruhig bleiben.',
-      lead: 'Ich entwickle Kotlin- und Java-Backends auf AWS – KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung. Mit über 15 Jahren Erfahrung.',
+      lead: 'Ich entwickle Kotlin- und Java-Backends mit Spring Boot auf AWS – KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung. Mit über 15 Jahren Erfahrung.',
       primary: 'Erstgespräch vereinbaren',
       secondary: 'Success Stories ansehen',
       codeComment: '// Große Payloads? Landen automatisch in S3.',
     },
     facts: [
       ['15+', 'Jahre Backend-Erfahrung'],
-      ['Kotlin & Java', 'auf der JVM zu Hause'],
+      ['Kotlin & Java', 'mit Spring Boot auf der JVM zu Hause'],
       ['AWS', 'SQS, SNS, S3 und mehr'],
       ['3 Libraries', 'Open Source auf Maven Central'],
     ],
@@ -47,7 +47,7 @@ export const homePage: Record<Lang, HomePage> = {
           icon: 'code',
           title: 'Backend-Entwicklung',
           text: 'Robuste Services in Kotlin und Java: saubere APIs, durchdachte Datenmodelle, Tests, die etwas absichern.',
-          bullets: ['Neue Services & APIs', 'Java-zu-Kotlin-Modernisierung', 'Testautomatisierung'],
+          bullets: ['Spring-Boot-Services & REST-APIs', 'Java-zu-Kotlin-Modernisierung', 'Testautomatisierung'],
         },
         {
           icon: 'cloud',
@@ -96,20 +96,20 @@ export const homePage: Record<Lang, HomePage> = {
     },
   },
   en: {
-    metaTitle: 'Christoph Sens – Kotlin and Java backends on AWS',
+    metaTitle: 'Christoph Sens – Kotlin, Java & Spring Boot on AWS',
     metaDescription:
-      'Freelance backend engineer for Kotlin, Java and AWS. AI-assisted for speed, human for architecture, review and accountability – with more than 15 years of experience.',
+      'Freelance backend engineer for Kotlin, Java, Spring Boot and AWS. AI-assisted for speed, human for architecture, review and accountability – with more than 15 years of experience.',
     hero: {
-      eyebrow: 'Freelance Backend Engineer · Kotlin · Java · AWS',
+      eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends that stay calm under load.',
-      lead: 'I build Kotlin and Java backends on AWS – AI-assisted for speed, human for architecture, review and accountability. With more than 15 years of experience.',
+      lead: 'I build Kotlin and Java backends with Spring Boot on AWS – AI-assisted for speed, human for architecture, review and accountability. With more than 15 years of experience.',
       primary: 'Book an intro call',
       secondary: 'See success stories',
       codeComment: '// Large payloads? They go to S3 automatically.',
     },
     facts: [
       ['15+', 'years of backend experience'],
-      ['Kotlin & Java', 'at home on the JVM'],
+      ['Kotlin & Java', 'at home on the JVM with Spring Boot'],
       ['AWS', 'SQS, SNS, S3 and more'],
       ['3 Libraries', 'open source on Maven Central'],
     ],
@@ -122,7 +122,7 @@ export const homePage: Record<Lang, HomePage> = {
           icon: 'code',
           title: 'Backend development',
           text: 'Robust services in Kotlin and Java: clean APIs, well-designed data models, tests that actually protect something.',
-          bullets: ['New services & APIs', 'Java-to-Kotlin modernization', 'Test automation'],
+          bullets: ['Spring Boot services & REST APIs', 'Java-to-Kotlin modernization', 'Test automation'],
         },
         {
           icon: 'cloud',
