@@ -1,4 +1,4 @@
-*This is a translation for convenience. The [German version](/impressum/) is legally binding.*
+*This is a translation for convenience. The [German version](/de/impressum/) is legally binding.*
 
 ## Information pursuant to § 5 DDG (German Digital Services Act)
 

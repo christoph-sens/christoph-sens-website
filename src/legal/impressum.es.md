@@ -1,4 +1,4 @@
-*Esta es una traducción de cortesía. Solo la [versión en alemán](/impressum/) es jurídicamente vinculante.*
+*Esta es una traducción de cortesía. Solo la [versión en alemán](/de/impressum/) es jurídicamente vinculante.*
 
 ## Información conforme al § 5 DDG (Ley alemana de servicios digitales)
 

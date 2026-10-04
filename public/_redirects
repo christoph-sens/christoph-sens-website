@@ -1,18 +1,36 @@
-# Old Wix URLs → new pages (301). First match wins, so specific rules come before the catch-alls.
+# Permanent redirects (301). First match wins, so specific rules come before the catch-alls.
+# Rules match the path exactly, so paths with a trailing slash are listed with and without it.
+# English is served without a prefix; German lives under /de/.
 
-# Success stories that have their own page
-/post/der-scan-befund-der-nie-verschwindet-wie-eine-ki-drei-aws-legacy-bibliotheken-an-einem-nachmittag  /success-stories/kotlin-extended-clients/  301
-/post/pdf-generierung-in-micro-service-landschaften-effektive-l%C3%B6sungen-f%C3%BCr-mehrsprachigkeit-und-lizenzfra  /success-stories/pdf-generierung/  301
-/post/pdf-generierung-in-micro-service-landschaften-effektive-lösungen-für-mehrsprachigkeit-und-lizenzfra  /success-stories/pdf-generierung/  301
+# Old Wix URLs (German content) → German pages
+/post/der-scan-befund-der-nie-verschwindet-wie-eine-ki-drei-aws-legacy-bibliotheken-an-einem-nachmittag  /de/success-stories/kotlin-extended-clients/  301
+/post/pdf-generierung-in-micro-service-landschaften-effektive-l%C3%B6sungen-f%C3%BCr-mehrsprachigkeit-und-lizenzfra  /de/success-stories/pdf-generierung/  301
+/post/pdf-generierung-in-micro-service-landschaften-effektive-lösungen-für-mehrsprachigkeit-und-lizenzfra  /de/success-stories/pdf-generierung/  301
+/post/success-story-erfolgreicher-technologiewechsel-wie-ein-medienkonzern-seine-app-entwicklung-umstell  /de/blog/technologiewechsel-medienkonzern/  301
+/post/automatische-generierung-von-bildschirmmasken-aus-konfigurationsdateien  /de/blog/bildschirmmasken-aus-konfigurationsdateien/  301
+/post/die-rolle-von-signals  /de/blog/die-rolle-von-signals/  301
+/blog/categories/success-story  /de/blog/#success-stories  301
+/blog/categories/blog  /de/blog/#fachartikel  301
+/blog/categories/*  /de/blog/  301
+/post/*  /de/blog/  301
+/blog-feed.xml  /de/blog/  301
 
-# Blog posts
-/post/success-story-erfolgreicher-technologiewechsel-wie-ein-medienkonzern-seine-app-entwicklung-umstell  /blog/technologiewechsel-medienkonzern/  301
-/post/automatische-generierung-von-bildschirmmasken-aus-konfigurationsdateien  /blog/bildschirmmasken-aus-konfigurationsdateien/  301
-/post/die-rolle-von-signals  /blog/die-rolle-von-signals/  301
+# German pages from before English became the default (paths that are not reused by English pages)
+/leistungen/  /de/leistungen/  301
+/leistungen  /de/leistungen/  301
+/impressum/  /de/impressum/  301
+/impressum  /de/impressum/  301
+/datenschutz/  /de/datenschutz/  301
+/datenschutz  /de/datenschutz/  301
+/success-stories/pdf-generierung/  /de/success-stories/pdf-generierung/  301
+/success-stories/pdf-generierung  /de/success-stories/pdf-generierung/  301
+/blog/bildschirmmasken-aus-konfigurationsdateien/  /de/blog/bildschirmmasken-aus-konfigurationsdateien/  301
+/blog/bildschirmmasken-aus-konfigurationsdateien  /de/blog/bildschirmmasken-aus-konfigurationsdateien/  301
+/blog/die-rolle-von-signals/  /de/blog/die-rolle-von-signals/  301
+/blog/die-rolle-von-signals  /de/blog/die-rolle-von-signals/  301
+/blog/technologiewechsel-medienkonzern/  /de/blog/technologiewechsel-medienkonzern/  301
+/blog/technologiewechsel-medienkonzern  /de/blog/technologiewechsel-medienkonzern/  301
 
-# Blog index and categories
-/blog/categories/success-story  /blog/#success-stories  301
-/blog/categories/blog  /blog/#fachartikel  301
-/blog/categories/*  /blog/  301
-/post/*  /blog/  301
-/blog-feed.xml  /blog/  301
+# English pages used to live under /en/
+/en  /  301
+/en/*  /:splat  301
