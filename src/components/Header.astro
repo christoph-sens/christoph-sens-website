@@ -1,5 +1,5 @@
 ---
-import { blogPath, email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+import { email, routes, ui, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -12,13 +12,13 @@ const { lang, page, alternates } = Astro.props;
 const t = ui[lang];
 const other: Lang = lang === 'de' ? 'en' : 'de';
 const isStory = page === 'storyKotlin' || page === 'storyPdf';
-const isBlog = Astro.url.pathname.startsWith(blogPath);
+const isBlog = Astro.url.pathname.startsWith(routes.blog[lang]);
 
 const links = [
   { href: routes.home[lang], label: t.nav.home, active: page === 'home' },
   { href: routes.services[lang], label: t.nav.services, active: page === 'services' },
   { href: `${routes.home[lang]}#success-stories`, label: t.nav.stories, active: isStory },
-  { href: blogPath, label: t.nav.blog, active: isBlog },
+  { href: routes.blog[lang], label: t.nav.blog, active: isBlog },
 ];
 ---
 

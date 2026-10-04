@@ -6,7 +6,7 @@ import CodeCard from '../components/CodeCard.astro';
 import StoryCard from '../components/StoryCard.astro';
 import { homePage } from '../data/home';
 import portrait from '../assets/portrait.jpg';
-import { blogPath, email, external, routes, ui, type Lang } from '../i18n/ui';
+import { email, external, routes, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -145,13 +145,13 @@ const icons = {
           <span class="eyebrow">{t.stories.eyebrow}</span>
           <h2 class="h2">{t.stories.title}</h2>
         </div>
-        <a class="btn btn-ghost" href={`${blogPath}#success-stories`} hreflang="de">{t.stories.button}</a>
+        <a class="btn btn-ghost" href={`${routes.blog[lang]}#${ui[lang].blog.anchors.stories}`}>{t.stories.button}</a>
       </div>
       <div class="grid-auto grid-wide">
         <StoryCard lang={lang} story="storyKotlin" dark />
         <StoryCard lang={lang} story="storyPdf" />
       </div>
-      <a class="text-link more-link" href={`${blogPath}#fachartikel`} hreflang="de">{t.stories.more}</a>
+      <a class="text-link more-link" href={`${routes.blog[lang]}#${ui[lang].blog.anchors.articles}`}>{t.stories.more}</a>
     </div>
   </section>
 </BaseLayout>

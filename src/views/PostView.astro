@@ -1,8 +1,8 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { categoryLabels, formatDate } from '../data/blog';
-import { blogPath } from '../i18n/ui';
+import { formatDate, postAlternates, postLang } from '../data/blog';
+import { routes, ui } from '../i18n/ui';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -11,17 +11,21 @@ interface Props {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const { title, description, date, updated, category, tags } = post.data;
+const lang = postLang(post);
+const t = ui[lang].blog;
+const blogPath = routes.blog[lang];
+const alternates = await postAlternates(post);
 ---
 
-<BaseLayout lang="de" path={`${blogPath}${post.id}/`} title={`${title} – Christoph Sens`} description={description}>
+<BaseLayout lang={lang} alternates={alternates} title={`${title} – Christoph Sens`} description={description}>
   <article class="section post">
     <div class="container inner">
       <a class="back" href={blogPath}>← Blog</a>
       <div class="meta mono">
         <span class="dot" aria-hidden="true"></span>
-        {categoryLabels[category]} ·
-        <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
-        {updated && <span>· aktualisiert {formatDate(updated)}</span>}
+        {t.categories[category]} ·
+        <time datetime={date.toISOString().slice(0, 10)}>{formatDate(date, lang)}</time>
+        {updated && <span>· {t.updated} {formatDate(updated, lang)}</span>}
       </div>
       <h1>{title}</h1>
       <p class="lead">{description}</p>
@@ -30,14 +34,14 @@ const { title, description, date, updated, category, tags } = post.data;
       </div>
       {
         tags.length > 0 && (
-          <ul class="chips tags" aria-label="Themen">
+          <ul class="chips tags" aria-label={t.topics}>
             {tags.map((tag) => (
               <li>{tag}</li>
             ))}
           </ul>
         )
       }
-      <a class="btn btn-ghost all" href={blogPath}>Alle Beiträge</a>
+      <a class="btn btn-ghost all" href={blogPath}>{t.all}</a>
     </div>
   </article>
 </BaseLayout>

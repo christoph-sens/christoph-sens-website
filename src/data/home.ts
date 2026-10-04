@@ -166,8 +166,8 @@ export const homePage: Record<Lang, HomePage> = {
     stories: {
       eyebrow: '04 — Success Stories',
       title: 'Results from real projects.',
-      button: 'All success stories (German)',
-      more: 'More articles on the blog (German) →',
+      button: 'All success stories',
+      more: 'More articles on the blog →',
     },
   },
 };

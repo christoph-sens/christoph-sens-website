@@ -1,7 +1,7 @@
 export const languages = ['de', 'en'] as const;
 export type Lang = (typeof languages)[number];
 
-export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'imprint' | 'privacy';
+export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'blog' | 'imprint' | 'privacy';
 
 /** URL of every page in every language. Keeps the language switcher and hreflang links in sync. */
 export const routes: Record<PageKey, Record<Lang, string>> = {
@@ -15,12 +15,11 @@ export const routes: Record<PageKey, Record<Lang, string>> = {
     de: '/success-stories/pdf-generierung/',
     en: '/en/success-stories/pdf-generation/',
   },
+  /** Blog index; posts live at <blog path><slug>/. */
+  blog: { de: '/blog/', en: '/en/blog/' },
   imprint: { de: '/impressum/', en: '/en/legal-notice/' },
   privacy: { de: '/datenschutz/', en: '/en/privacy-policy/' },
 };
-
-/** The blog exists in German only (no hreflang alternates). Posts live under this path. */
-export const blogPath = '/blog/';
 
 export const email: Record<Lang, string> = {
   de: 'kontakt@christoph-sens.com',
@@ -56,10 +55,23 @@ export const ui = {
     },
     readMore: 'Weiterlesen →',
     nextStory: 'Nächste Success Story',
+    blog: {
+      title: 'Blog – Christoph Sens',
+      description: 'Success Stories und Fachartikel von Christoph Sens zu Kotlin, Java, AWS, Architektur und Softwareentwicklung.',
+      heroTitle: 'Success Stories und Fachartikel',
+      heroLead: 'Aus echten Projekten: was die Aufgabe war, wie ich sie gelöst habe und was dabei herauskam.',
+      sections: { stories: 'Success Stories', articles: 'Fachartikel' },
+      anchors: { stories: 'success-stories', articles: 'fachartikel' },
+      categories: { 'success-story': 'Success Story', article: 'Fachartikel' },
+      updated: 'aktualisiert',
+      topics: 'Themen',
+      all: 'Alle Beiträge',
+      locale: 'de-DE',
+    },
   },
   en: {
     navLabel: 'Main navigation',
-    nav: { home: 'Home', services: 'Services', stories: 'Success stories', blog: 'Blog (DE)' },
+    nav: { home: 'Home', services: 'Services', stories: 'Success stories', blog: 'Blog' },
     navCta: 'Start a project',
     back: 'Home',
     langSwitchLabel: 'Language',
@@ -81,5 +93,18 @@ export const ui = {
     },
     readMore: 'Read more →',
     nextStory: 'Next success story',
+    blog: {
+      title: 'Blog – Christoph Sens',
+      description: 'Success stories and articles by Christoph Sens on Kotlin, Java, AWS, architecture and software development.',
+      heroTitle: 'Success stories and articles',
+      heroLead: 'From real projects: what the task was, how I solved it and what came out of it.',
+      sections: { stories: 'Success stories', articles: 'Articles' },
+      anchors: { stories: 'success-stories', articles: 'articles' },
+      categories: { 'success-story': 'Success story', article: 'Article' },
+      updated: 'updated',
+      topics: 'Topics',
+      all: 'All posts',
+      locale: 'en-GB',
+    },
   },
 } as const satisfies Record<Lang, unknown>;
