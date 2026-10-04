@@ -3,7 +3,7 @@ title: 'Generating screen forms automatically from configuration files'
 description: 'Generating screen forms, including their REST integration, automatically from configuration files – a success story from an Angular project.'
 date: 2024-04-19
 updated: 2024-06-15
-translation: bildschirmmasken-aus-konfigurationsdateien
+key: bildschirmmasken-aus-konfigurationsdateien
 category: success-story
 tags: [Angular, REST, Code generation]
 ---

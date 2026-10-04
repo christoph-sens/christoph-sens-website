@@ -1,29 +1,32 @@
-export const languages = ['de', 'en'] as const;
+export const languages = ['de', 'en', 'es'] as const;
 export type Lang = (typeof languages)[number];
 
 export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'blog' | 'imprint' | 'privacy';
 
 /** URL of every page in every language. Keeps the language switcher and hreflang links in sync. */
 export const routes: Record<PageKey, Record<Lang, string>> = {
-  home: { de: '/', en: '/en/' },
-  services: { de: '/leistungen/', en: '/en/services/' },
+  home: { de: '/', en: '/en/', es: '/es/' },
+  services: { de: '/leistungen/', en: '/en/services/', es: '/es/servicios/' },
   storyKotlin: {
     de: '/success-stories/kotlin-extended-clients/',
     en: '/en/success-stories/kotlin-extended-clients/',
+    es: '/es/casos-de-exito/kotlin-extended-clients/',
   },
   storyPdf: {
     de: '/success-stories/pdf-generierung/',
     en: '/en/success-stories/pdf-generation/',
+    es: '/es/casos-de-exito/generacion-de-pdf/',
   },
   /** Blog index; posts live at <blog path><slug>/. */
-  blog: { de: '/blog/', en: '/en/blog/' },
-  imprint: { de: '/impressum/', en: '/en/legal-notice/' },
-  privacy: { de: '/datenschutz/', en: '/en/privacy-policy/' },
+  blog: { de: '/blog/', en: '/en/blog/', es: '/es/blog/' },
+  imprint: { de: '/impressum/', en: '/en/legal-notice/', es: '/es/aviso-legal/' },
+  privacy: { de: '/datenschutz/', en: '/en/privacy-policy/', es: '/es/politica-de-privacidad/' },
 };
 
 export const email: Record<Lang, string> = {
   de: 'kontakt@christoph-sens.com',
   en: 'contact@christoph-sens.com',
+  es: 'contact@christoph-sens.com',
 };
 
 export const external = {
@@ -68,6 +71,7 @@ export const ui = {
       all: 'Alle Beiträge',
       locale: 'de-DE',
     },
+    ogLocale: 'de_DE',
   },
   en: {
     navLabel: 'Main navigation',
@@ -106,5 +110,45 @@ export const ui = {
       all: 'All posts',
       locale: 'en-GB',
     },
+    ogLocale: 'en_US',
+  },
+  es: {
+    navLabel: 'Navegación principal',
+    nav: { home: 'Inicio', services: 'Servicios', stories: 'Casos de éxito', blog: 'Blog' },
+    navCta: 'Solicitar proyecto',
+    back: 'Inicio',
+    langSwitchLabel: 'Idioma',
+    contact: {
+      eyebrow: 'Contacto',
+      title: 'Hablemos de su backend.',
+      text: 'Escríbame brevemente de qué se trata. Le responderé personalmente y veremos juntos si puedo ayudarle y cómo.',
+      portraitAlt: 'Retrato de Christoph Sens',
+      role: 'Su contacto directo',
+    },
+    footer: {
+      tagline: 'Backends en Kotlin y Java sobre AWS',
+      imprint: 'Aviso legal',
+      privacy: 'Privacidad',
+    },
+    legal: {
+      imprint: { title: 'Aviso legal', description: 'Aviso legal (Impressum) de christoph-sens.com.' },
+      privacy: { title: 'Política de privacidad', description: 'Política de privacidad de christoph-sens.com: alojamiento, correo electrónico, registros del servidor y sus derechos.' },
+    },
+    readMore: 'Leer más →',
+    nextStory: 'Siguiente caso de éxito',
+    blog: {
+      title: 'Blog – Christoph Sens',
+      description: 'Casos de éxito y artículos técnicos de Christoph Sens sobre Kotlin, Java, AWS, arquitectura y desarrollo de software.',
+      heroTitle: 'Casos de éxito y artículos técnicos',
+      heroLead: 'De proyectos reales: cuál era el reto, cómo lo resolví y qué resultado se obtuvo.',
+      sections: { stories: 'Casos de éxito', articles: 'Artículos técnicos' },
+      anchors: { stories: 'casos-de-exito', articles: 'articulos' },
+      categories: { 'success-story': 'Caso de éxito', article: 'Artículo técnico' },
+      updated: 'actualizado',
+      topics: 'Temas',
+      all: 'Todas las entradas',
+      locale: 'es-ES',
+    },
+    ogLocale: 'es_ES',
   },
 } as const satisfies Record<Lang, unknown>;

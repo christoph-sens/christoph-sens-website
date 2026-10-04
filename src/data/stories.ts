@@ -274,6 +274,112 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
         },
       ],
     },
+    es: {
+      tags: 'Kotlin · AWS · Open Source',
+      title: 'Extended clients para Kotlin – cerrando un hueco en el ecosistema de AWS',
+      teaser:
+        'AWS ofrece extended clients para mensajes grandes de SQS y SNS solo para Java. La contraparte en Kotlin: unas 730 líneas en lugar de miles, sin Jackson, con tests y en Maven Central.',
+      metaDescription:
+        'Caso de éxito: extended clients para mensajes grandes de SQS y SNS en Kotlin – desarrollados con apoyo de IA, sin Jackson, con licencias revisadas y publicados en Maven Central.',
+      lead: 'AWS ofrece extended clients para mensajes grandes de SQS y SNS solo para Java. Construí la contraparte para Kotlin: con apoyo de IA, idiomática, sin Jackson, con licencias revisadas y publicada en Maven Central.',
+      glance: [
+        ['Problema', 'AWS ofrece librerías para mensajes grandes de SQS y SNS, pero solo para Java. Los equipos de Kotlin que usan aws-sdk-kotlin no tienen equivalente.'],
+        ['Solución', 'Tres nuevas librerías diseñadas para Kotlin: s3overflow, sqsoverflow y snsoverflow.'],
+        ['Resultado', 'Unas 730 líneas de Kotlin en lugar de miles de líneas de Java, sin dependencia de Jackson, con licencias revisadas, con tests y publicadas en Maven Central.'],
+      ],
+      facts: [
+        ['~730', 'líneas de Kotlin para las tres librerías'],
+        ['1 línea', 'de delegación de interfaz en lugar de ~1150 líneas de código de reenvío'],
+        ['8 + 2', 'métodos con lógica real en SQS y SNS'],
+        ['0', 'dependencias de Jackson'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Contexto',
+          title: 'Un patrón probado – pero solo para Java',
+          blocks: [
+            { type: 'p', html: 'Amazon SQS y SNS limitan el tamaño de un mensaje. Para payloads más grandes existe el patrón claim-check: el payload se guarda en S3 y por la cola solo viaja una pequeña referencia. AWS lo ofrece como librerías listas para usar – pero solo para el AWS SDK for Java.' },
+            { type: 'p', html: 'Por eso, los equipos de Kotlin que usan aws-sdk-kotlin o bien mantienen en paralelo un segundo SDK con todas sus dependencias, o bien reconstruyen el patrón por su cuenta. Además, las librerías Java arrastran versiones antiguas de Jackson para las que la GitHub Advisory Database registra siete avisos de seguridad, tres de ellos de gravedad alta.' },
+          ],
+        },
+        {
+          eyebrow: 'Diseño',
+          title: 'Traducir no basta',
+          blocks: [
+            { type: 'p', html: 'Traducir el código Java línea por línea habría funcionado, pero habría sido mal Kotlin. Mi objetivo era un cliente diseñado como se diseñaría en Kotlin desde el principio.' },
+            {
+              type: 'list',
+              items: [
+                '<strong>Una clase en lugar de dos.</strong> aws-sdk-kotlin se basa en corrutinas – no hacen falta clases separadas para llamadas síncronas y asíncronas.',
+                '<strong>Desaparecen 1150 líneas de código de reenvío.</strong> En Kotlin, la delegación de interfaces lo resuelve en una sola línea.',
+                '<strong>Adiós a Jackson.</strong> kotlinx.serialization serializa la referencia a S3 – los avisos de seguridad de Jackson no afectan a este código.',
+              ],
+            },
+            {
+              type: 'code',
+              file: 'SqsExtendedClient.kt',
+              html: kotlinClass('// + 7 métodos más con lógica real – el resto de la interfaz', '//   se reenvía automáticamente con "by sqsClient"'),
+            },
+            { type: 'p', html: 'SqsExtendedClient y SnsExtendedClient son clientes completos de aws-sdk-kotlin y funcionan en cualquier lugar donde se espere un cliente normal.' },
+          ],
+        },
+        {
+          eyebrow: 'Reparto del trabajo',
+          title: 'IA e ingeniero – con roles claros',
+          blocks: [
+            {
+              type: 'split',
+              left: { title: 'La IA …', items: ['escribió código según mis especificaciones', 'generó tests y boilerplate', 'redactó un primer borrador de la documentación'] },
+              right: {
+                title: 'Yo …',
+                items: ['definí la arquitectura', 'sustituí Jackson por kotlinx.serialization', 'revisé las licencias de cada proyecto', 'fijé los límites y los documenté abiertamente', 'aseguré los tests, el build y la publicación'],
+              },
+            },
+            { type: 'p', html: 'El núcleo de las tres librerías se escribió en una tarde. Los tests, la revisión de licencias y la publicación vinieron después – y ahí está el verdadero valor.' },
+          ],
+        },
+        {
+          eyebrow: 'Calidad',
+          title: 'Licencias, límites, tests',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                '<strong>Licencias:</strong> s3overflow es una implementación nueva e independiente. sqsoverflow y snsoverflow se declaran como obras derivadas de las librerías de AWS, con la atribución en cada archivo que exige la licencia Apache 2.0.',
+                '<strong>Límites:</strong> Los clientes de Kotlin no son compatibles a nivel de formato de mensaje con las librerías Java. La documentación lo indica abiertamente.',
+                '<strong>Tests:</strong> Los tests de integración verifican el comportamiento contra un emulador local de AWS. Cada versión incluye una procedencia firmada.',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Resultado',
+          title: 'Publicado y listo para usar',
+          blocks: [
+            { type: 'p', html: 'Las tres librerías son open source y están publicadas en Maven Central. Para añadirlas basta una línea de Gradle:' },
+            { type: 'code', file: 'build.gradle.kts', html: gradleLine },
+            { type: 'p', html: 'Las librerías Java de AWS siguen manteniéndose y siguen siendo la opción correcta para servicios Java. Los nuevos clientes no las sustituyen, sino que cierran un hueco para Kotlin.' },
+            repoButtons,
+            { type: 'p', html: `Detalles técnicos: <a href="${englishPost}" hreflang="en">Large SQS and SNS messages in Kotlin</a> (en inglés).` },
+          ],
+        },
+        {
+          eyebrow: 'Para su proyecto',
+          title: 'Qué significa esto para usted',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                'Identificar el hueco real en lugar de gestionar síntomas.',
+                'Diseñar una solución para la plataforma de destino en lugar de portar mecánicamente código ajeno.',
+                'Usar la IA para ganar velocidad y responsabilizarse del resultado – con revisión de licencias, tests y una publicación trazable.',
+              ],
+            },
+            { type: 'p', html: '¿A su equipo le falta una pieza que hasta ahora solo existe para otra plataforma? Póngase en contacto conmigo.' },
+          ],
+        },
+      ],
+    },
   },
   storyPdf: {
     de: {
@@ -384,6 +490,62 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
             { type: 'p', html: 'A working prototype is publicly available on GitHub. It delivers PDFs synchronously and can easily be adapted for asynchronous distribution.' },
             pdfStack,
             { type: 'buttons', items: [{ label: 'Prototype on GitHub', href: pdfRepo }] },
+          ],
+        },
+      ],
+    },
+    es: {
+      tags: 'Kotlin · Java · Spring Boot · AWS',
+      title: 'Generación de PDF en entornos de microservicios',
+      teaser:
+        'Un microservicio genera PDF multilingües a partir de plantillas HTML. Las plantillas y las traducciones se pueden cambiar sin despliegue – con componentes de licencia libre como OpenPDF y Noto.',
+      metaDescription:
+        'Caso de éxito: generación de PDF multilingüe como microservicio con Thymeleaf, Flying Saucer y OpenPDF – plantillas y traducciones intercambiables sin despliegue.',
+      lead: 'Un cliente quería ampliar su entorno de microservicios con la generación y distribución de documentos PDF – en varios idiomas, sin despliegues costosos y sin trampas de licencias.',
+      glance: [
+        ['Reto', 'Generar y distribuir documentos PDF – integrados en el entorno AWS existente del cliente.'],
+        ['Solución', 'Un microservicio propio genera los PDF a partir de plantillas HTML con Thymeleaf, Flying Saucer y OpenPDF y se conecta mediante REST.'],
+        ['Resultado', 'Las plantillas y las traducciones se pueden cambiar sin despliegue – con componentes cuya licencia permite el uso comercial.'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Tecnología',
+          title: 'Entra HTML, sale PDF',
+          blocks: [
+            { type: 'p', html: 'El proyecto utiliza Flying Saucer para convertir HTML en PDF. Por debajo puede usarse como librería PDF iText 5 u OpenPDF – los documentos resultantes son idénticos en tamaño y aspecto.' },
+            { type: 'p', html: 'La recomendación fue OpenPDF: tiene licencia LGPL y puede usarse sin problemas en entornos comerciales. Además, el equipo de Flying Saucer dejó de dar soporte a iText 5 en mayo de 2024.' },
+          ],
+        },
+        {
+          eyebrow: 'Integración',
+          title: 'Cambiar sin desplegar',
+          blocks: [
+            { type: 'p', html: 'Un requisito clave: modificar plantillas PDF y traducciones sin tener que desplegar cada vez.' },
+            {
+              type: 'list',
+              items: [
+                'Un microservicio propio se encarga de generar los PDF.',
+                'Se conecta al entorno AWS existente mediante interfaces REST.',
+                'Las plantillas HTML y las traducciones se guardan en una base de datos y se cargan de forma dinámica.',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Fuentes',
+          title: 'La cuestión de licencias que se subestima',
+          blocks: [
+            { type: 'p', html: 'La fuente incrustada en los PDF requiere especial atención – sobre todo para otros alfabetos como el cirílico. Fuentes populares como Arial requieren licencia y pueden generar costes considerables.' },
+            { type: 'p', html: 'La solución: la familia de fuentes gratuita Noto. Admite más de 800 idiomas y puede redistribuirse libremente bajo la SIL Open Font License.' },
+          ],
+        },
+        {
+          eyebrow: 'Prototipo',
+          title: 'Funcionando en GitHub',
+          blocks: [
+            { type: 'p', html: 'Hay un prototipo funcional disponible públicamente en GitHub. Entrega los PDF de forma síncrona y se puede adaptar fácilmente a una distribución asíncrona.' },
+            pdfStack,
+            { type: 'buttons', items: [{ label: 'Prototipo en GitHub', href: pdfRepo }] },
           ],
         },
       ],
