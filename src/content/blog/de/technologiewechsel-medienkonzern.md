@@ -3,6 +3,7 @@ title: 'Erfolgreicher Technologiewechsel: Wie ein Medienkonzern seine App-Entwic
 description: 'Wie ein großer Medienkonzern seine App-Entwicklung mit Flutter auf eine gemeinsame Technologiebasis stellte und ins Haus holte.'
 date: 2024-04-19
 updated: 2024-04-22
+translation: media-group-technology-switch
 category: success-story
 tags: [Flutter, App-Entwicklung, Migration, Migrationsstrategie]
 ---
@@ -36,7 +37,7 @@ Das gesamte Inhaltsangebot (z. B. News-Artikel) des Konzerns wird durch ein Cont
 
 Der Zugriff via REST wurde einmal in einer Bibliothek bereitgestellt. Somit kann jede App die Bibliothek nutzen und muss die Anbindung ans CMS nicht selbst implementieren. Das hat den Vorteil, dass diese bei Änderungen oder Bugfixes nur einmal gewartet werden muss.
 
-![Verschiedene Apps kommunizieren mit demselben CMS.](../../assets/blog/cms-apps.jpg)
+![Verschiedene Apps kommunizieren mit demselben CMS.](../../../assets/blog/cms-apps.jpg)
 
 ## Erfolgsbilanz: Zwei erfolgreiche Apps und gesteigerte Effizienz
 

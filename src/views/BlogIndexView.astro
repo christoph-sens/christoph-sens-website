@@ -2,27 +2,23 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import { blogEntries, formatDate } from '../data/blog';
-import { blogPath } from '../i18n/ui';
+import { ui, type Lang } from '../i18n/ui';
 
-const entries = await blogEntries();
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].blog;
+const entries = await blogEntries(lang);
 const sections = [
-  { id: 'success-stories', title: 'Success Stories', items: entries.filter((e) => e.category === 'success-story') },
-  { id: 'fachartikel', title: 'Fachartikel', items: entries.filter((e) => e.category === 'article') },
+  { id: t.anchors.stories, title: t.sections.stories, items: entries.filter((e) => e.category === 'success-story') },
+  { id: t.anchors.articles, title: t.sections.articles, items: entries.filter((e) => e.category === 'article') },
 ];
 ---
 
-<BaseLayout
-  lang="de"
-  path={blogPath}
-  title="Blog – Christoph Sens"
-  description="Success Stories und Fachartikel von Christoph Sens zu Kotlin, Java, AWS, Architektur und Softwareentwicklung."
->
-  <PageHero
-    lang="de"
-    eyebrow="Blog"
-    title="Success Stories und Fachartikel"
-    lead="Aus echten Projekten: was die Aufgabe war, wie ich sie gelöst habe und was dabei herauskam."
-  />
+<BaseLayout lang={lang} page="blog" title={t.title} description={t.description}>
+  <PageHero lang={lang} eyebrow="Blog" title={t.heroTitle} lead={t.heroLead} />
 
   {
     sections.map((section) => (
@@ -34,7 +30,7 @@ const sections = [
               <li>
                 <a class="card card-link entry" href={e.href}>
                   <time class="mono date" datetime={e.date.toISOString().slice(0, 10)}>
-                    {formatDate(e.date)}
+                    {formatDate(e.date, lang)}
                   </time>
                   <h3 class="h3">{e.title}</h3>
                   <p class="muted">{e.description}</p>

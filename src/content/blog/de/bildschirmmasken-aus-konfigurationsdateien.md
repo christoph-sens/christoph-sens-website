@@ -3,6 +3,7 @@ title: 'Automatische Generierung von Bildschirmmasken aus Konfigurationsdateien'
 description: 'Bildschirmmasken samt REST-Anbindung automatisch aus Konfigurationsdateien generieren – eine Erfolgsgeschichte aus einem Angular-Projekt.'
 date: 2024-04-19
 updated: 2024-06-15
+translation: screen-forms-from-configuration-files
 category: success-story
 tags: [Angular, REST, Code-Generierung]
 ---
@@ -51,4 +52,4 @@ Anhand dieser Konfigurationsdatei wird die untere Bildschirmmaske generiert.
 }
 ```
 
-![Die aus der Konfigurationsdatei generierte Bildschirmmaske: Suche, Suchergebnisse und Detailansicht für Kunden.](../../assets/blog/bildschirmmaske.png)
+![Die aus der Konfigurationsdatei generierte Bildschirmmaske: Suche, Suchergebnisse und Detailansicht für Kunden.](../../../assets/blog/bildschirmmaske.png)

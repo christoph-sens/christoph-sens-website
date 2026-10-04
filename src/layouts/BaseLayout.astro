@@ -9,17 +9,18 @@ interface Props {
   lang: Lang;
   /** Page with versions in all languages (see routes). */
   page?: PageKey;
-  /** Path of a page that exists in this language only (e.g. German blog posts). */
-  path?: string;
+  /** URL of this page per language, for pages outside routes (e.g. blog posts). */
+  alternates?: Partial<Record<Lang, string>>;
   title: string;
   description: string;
   /** Show the contact section above the footer (off for legal pages). */
   contact?: boolean;
 }
 
-const { lang, page, path, title, description, contact = true } = Astro.props;
+const { lang, page, title, description, contact = true } = Astro.props;
 const site = Astro.site ?? new URL('https://www.christoph-sens.com');
-const alternates: Partial<Record<Lang, string>> = page ? routes[page] : { [lang]: path };
+const alternates: Partial<Record<Lang, string>> = page ? routes[page] : (Astro.props.alternates ?? {});
+const translated = languages.every((l) => alternates[l]);
 const canonical = new URL(alternates[lang] ?? '/', site);
 ---
 
@@ -31,11 +32,8 @@ const canonical = new URL(alternates[lang] ?? '/', site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {
-      page &&
-        languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(routes[page][l], site)} />)
-    }
-    {page && <link rel="alternate" hreflang="x-default" href={new URL(routes[page].de, site)} />}
+    {translated && languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(alternates[l]!, site)} />)}
+    {translated && <link rel="alternate" hreflang="x-default" href={new URL(alternates.de!, site)} />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
