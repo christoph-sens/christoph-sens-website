@@ -1,4 +1,5 @@
 # Permanent redirects (301). First match wins, so specific rules come before the catch-alls.
+# Rules match the path exactly, so paths with a trailing slash are listed with and without it.
 # English is served without a prefix; German lives under /de/.
 
 # Old Wix URLs (German content) → German pages
@@ -16,12 +17,20 @@
 
 # German pages from before English became the default (paths that are not reused by English pages)
 /leistungen/  /de/leistungen/  301
+/leistungen  /de/leistungen/  301
 /impressum/  /de/impressum/  301
+/impressum  /de/impressum/  301
 /datenschutz/  /de/datenschutz/  301
+/datenschutz  /de/datenschutz/  301
 /success-stories/pdf-generierung/  /de/success-stories/pdf-generierung/  301
+/success-stories/pdf-generierung  /de/success-stories/pdf-generierung/  301
 /blog/bildschirmmasken-aus-konfigurationsdateien/  /de/blog/bildschirmmasken-aus-konfigurationsdateien/  301
+/blog/bildschirmmasken-aus-konfigurationsdateien  /de/blog/bildschirmmasken-aus-konfigurationsdateien/  301
 /blog/die-rolle-von-signals/  /de/blog/die-rolle-von-signals/  301
+/blog/die-rolle-von-signals  /de/blog/die-rolle-von-signals/  301
 /blog/technologiewechsel-medienkonzern/  /de/blog/technologiewechsel-medienkonzern/  301
+/blog/technologiewechsel-medienkonzern  /de/blog/technologiewechsel-medienkonzern/  301
 
 # English pages used to live under /en/
+/en  /  301
 /en/*  /:splat  301
