@@ -44,11 +44,14 @@ const canonical = new URL(alternates[lang] ?? '/', site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
+    {/* Keeps Cloudflare's Email Obfuscation from rewriting mailto links: its decoder script is blocked by our CSP. */}
+    <Fragment set:html="<!--email_off-->" />
     <Header lang={lang} page={page} alternates={alternates} />
     <main>
       <slot />
     </main>
     {contact && <Contact lang={lang} />}
     <Footer lang={lang} />
+    <Fragment set:html="<!--/email_off-->" />
   </body>
 </html>
