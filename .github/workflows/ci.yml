@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   ci:
-    uses: christoph-sens/ci-workflows/.github/workflows/node-ci.yml@4558cd434b64221a062b172e7096eaa33ef0124f # v1.3.0
+    uses: christoph-sens/ci-workflows/.github/workflows/node-ci.yml@41f5f70b4081d16bcad31f96ac0578406396a534 # v1.3.5
     permissions:
       contents: read
       security-events: write # CodeQL results
