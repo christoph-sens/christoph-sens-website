@@ -6,6 +6,10 @@ updates:
       interval: weekly
     cooldown:
       default-days: 5
+    ignore:
+      # Astro is not yet compatible with TypeScript 7.
+      - dependency-name: typescript
+        versions: [">= 7"]
     groups:
       npm-minor-and-patch:
         update-types: [minor, patch]
