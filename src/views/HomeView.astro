@@ -18,6 +18,7 @@ const t = homePage[lang];
 const icons = {
   code: ['m8 7-5 5 5 5', 'm16 7 5 5-5 5', 'm14 4-4 16'],
   cloud: ['M17.5 19H8a5 5 0 1 1 .9-9.9A6 6 0 0 1 20 11a4 4 0 0 1-2.5 8Z'],
+  refresh: ['M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8', 'M21 3v5h-5', 'M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16', 'M8 16H3v5'],
   spark: ['M12 3v3', 'M12 18v3', 'M3 12h3', 'M18 12h3', 'm5.6 5.6 2.1 2.1', 'm16.3 16.3 2.1 2.1', 'm5.6 18.4 2.1-2.1', 'm16.3 7.7 2.1-2.1'],
 };
 ---
@@ -91,6 +92,31 @@ const icons = {
     </div>
   </section>
 
+  <!-- Open source -->
+  <section id="open-source" class="section block">
+    <div class="container stack gap-56">
+      <div class="section-head">
+        <div class="stack gap-16 head-copy wide">
+          <span class="eyebrow">{t.openSource.eyebrow}</span>
+          <h2 class="h2">{t.openSource.title}</h2>
+        </div>
+        <a class="btn btn-ghost" href={external.github}>{t.openSource.button}</a>
+      </div>
+      <p class="muted os-intro">{t.openSource.intro}</p>
+      <div class="grid-auto" style="--min: 340px">
+        {
+          t.openSource.libs.map((lib) => (
+            <a class="card card-link lib" href={lib.href}>
+              <span class="mono lib-group">{lib.group}</span>
+              <h3 class="mono lib-name">{lib.name}</h3>
+              <p class="muted">{lib.text}</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- Process -->
   <section id="arbeitsweise" class="section block process">
     <div class="container stack gap-64">
@@ -109,31 +135,6 @@ const icons = {
           ))
         }
       </ol>
-    </div>
-  </section>
-
-  <!-- Open source -->
-  <section id="open-source" class="section block">
-    <div class="container stack gap-56">
-      <div class="section-head">
-        <div class="stack gap-16 head-copy wide">
-          <span class="eyebrow">{t.openSource.eyebrow}</span>
-          <h2 class="h2">{t.openSource.title}</h2>
-        </div>
-        <a class="btn btn-ghost" href={external.github}>{t.openSource.button}</a>
-      </div>
-      <p class="muted os-intro">{t.openSource.intro}</p>
-      <div class="grid-auto">
-        {
-          t.openSource.libs.map((lib) => (
-            <a class="card card-link lib" href={`${external.github}/${lib.name}`}>
-              <span class="mono lib-group">com.christoph-sens</span>
-              <h3 class="mono lib-name">{lib.name}</h3>
-              <p class="muted">{lib.text}</p>
-            </a>
-          ))
-        }
-      </div>
     </div>
   </section>
 
@@ -392,6 +393,7 @@ const icons = {
 
   .lib-name {
     margin: 0;
+    overflow-wrap: anywhere;
     font-weight: 500;
     font-size: 26px;
   }
