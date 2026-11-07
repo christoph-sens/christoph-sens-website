@@ -38,7 +38,7 @@ Der dritte Grund ist Sicherheit. JSONPath-Ausdrücke kommen immer öfter nicht a
 
 ### Und ein persönlicher Grund
 
-Ich baue seit über 15 Jahren Backends mit Java und Kotlin. Open Source ist für mich der ehrlichste Weg, zu zeigen, wie ich arbeite: Jede Entscheidung, jeder Test und jeder Fehler ist öffentlich nachvollziehbar. Treetrail ist bewusst in Java geschrieben, nicht in Kotlin – eine Kotlin-Standardbibliothek als Abhängigkeit würde die Aufnahme in Projekte wie Spring, Apache Camel oder Apache NiFi unnötig erschweren.
+Ich baue seit über 10 Jahren Backends mit Java und Kotlin. Open Source ist für mich der ehrlichste Weg, zu zeigen, wie ich arbeite: Jede Entscheidung, jeder Test und jeder Fehler ist öffentlich nachvollziehbar. Treetrail ist bewusst in Java geschrieben, nicht in Kotlin – eine Kotlin-Standardbibliothek als Abhängigkeit würde die Aufnahme in Projekte wie Spring, Apache Camel oder Apache NiFi unnötig erschweren.
 
 ## Was Treetrail heute kann
 

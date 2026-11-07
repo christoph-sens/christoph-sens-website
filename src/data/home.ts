@@ -1,6 +1,6 @@
 import type { Lang } from '../i18n/ui';
 
-export type ServiceIcon = 'code' | 'cloud' | 'spark';
+export type ServiceIcon = 'code' | 'cloud' | 'refresh' | 'spark';
 
 export interface HomePage {
   metaTitle: string;
@@ -15,7 +15,7 @@ export interface HomePage {
     more: string;
   };
   process: { eyebrow: string; title: string; titleMuted: string; steps: { title: string; text: string }[] };
-  openSource: { eyebrow: string; title: string; button: string; intro: string; libs: { name: string; text: string }[] };
+  openSource: { eyebrow: string; title: string; button: string; intro: string; libs: { group: string; name: string; text: string; href: string }[] };
   stories: { eyebrow: string; title: string; button: string; more: string };
 }
 
@@ -23,20 +23,20 @@ export const homePage: Record<Lang, HomePage> = {
   de: {
     metaTitle: 'Christoph Sens – Kotlin, Java & Spring Boot auf AWS',
     metaDescription:
-      'Freelance Backend Engineer für Kotlin, Java, Spring Boot und AWS. KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung – mit über 15 Jahren Erfahrung.',
+      'Freelance Backend Engineer für Kotlin, Java, Spring Boot und AWS. KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung – mit über 10 Jahren Erfahrung.',
     hero: {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends, die unter Last ruhig bleiben.',
-      lead: 'Ich entwickle Kotlin- und Java-Backends mit Spring Boot auf AWS – KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung. Mit über 15 Jahren Erfahrung.',
+      lead: 'Ich entwickle Kotlin- und Java-Backends mit Spring Boot auf AWS – KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung. Mit über 10 Jahren Erfahrung.',
       primary: 'Erstgespräch vereinbaren',
       secondary: 'Success Stories ansehen',
       codeComment: '// Große Payloads? Landen automatisch in S3.',
     },
     facts: [
-      ['15+', 'Jahre Backend-Erfahrung'],
-      ['Kotlin & Java', 'mit Spring Boot auf der JVM zu Hause'],
-      ['AWS', 'SQS, SNS, S3 und mehr'],
-      ['3 Libraries', 'Open Source auf Maven Central'],
+      ['10+', 'Jahre in der Softwareentwicklung'],
+      ['70.000', 'Marktdaten im Lasttest in unter einer Minute aggregiert'],
+      ['Kotlin & Java', 'mit Spring Boot auf AWS'],
+      ['4 Libraries', 'Open Source auf Maven Central'],
     ],
     services: {
       eyebrow: '01 — Leistungen',
@@ -47,7 +47,13 @@ export const homePage: Record<Lang, HomePage> = {
           icon: 'code',
           title: 'Backend-Entwicklung',
           text: 'Robuste Services in Kotlin und Java: saubere APIs, durchdachte Datenmodelle, Tests, die etwas absichern.',
-          bullets: ['Spring-Boot-Services & REST-APIs', 'Java-zu-Kotlin-Modernisierung', 'Testautomatisierung'],
+          bullets: ['Spring-Boot-Services & REST-APIs', 'Kotlin und Java 25', 'Testautomatisierung'],
+        },
+        {
+          icon: 'refresh',
+          title: 'Modernisierung',
+          text: 'Altsysteme schrittweise ablösen, ohne den Betrieb zu gefährden – zuletzt bei einem Monolithen in der Energiewirtschaft: Die neue Aggregation verarbeitet im Lasttest 70.000 Marktdaten in unter einer Minute.',
+          bullets: ['Schrittweise Ablösung von Monolithen', 'Hexagonale Architektur', 'Java- und Spring-Boot-Upgrades'],
         },
         {
           icon: 'cloud',
@@ -66,7 +72,7 @@ export const homePage: Record<Lang, HomePage> = {
       more: 'Alle Leistungen im Detail →',
     },
     process: {
-      eyebrow: '02 — Arbeitsweise',
+      eyebrow: '03 — Arbeitsweise',
       title: 'KI für das Tempo.',
       titleMuted: 'Ein Mensch für die Verantwortung.',
       steps: [
@@ -77,15 +83,17 @@ export const homePage: Record<Lang, HomePage> = {
       ],
     },
     openSource: {
-      eyebrow: '03 — Open Source',
-      title: 'Code, den Sie sich vorher ansehen können.',
+      eyebrow: '02 — Open Source & Standards',
+      title: 'Code und Standards, die Sie nachprüfen können.',
       button: 'Alle Projekte auf GitHub',
       intro:
-        'Extended Clients für aws-sdk-kotlin: Sie lagern große SQS- und SNS-Nachrichten automatisch in S3 aus – abgeleitet von den AWS-Java-Libraries, gebaut für Kotlin und Coroutines.',
+        'Ich arbeite öffentlich: an eigenen Libraries auf Maven Central und an den Standards, auf denen sie aufbauen – von der offiziellen Testsuite für JSONPath (RFC 9535) bis zu Jakarta JSON Processing.',
       libs: [
-        { name: 's3overflow', text: 'Das Fundament: Payload-Store auf S3, auf dem die anderen Clients aufbauen.' },
-        { name: 'sqsoverflow', text: 'Extended Client für Amazon SQS – Nachrichten über dem Limit gehen transparent nach S3.' },
-        { name: 'snsoverflow', text: 'Extended Client für Amazon SNS – kombinierbar mit sqsoverflow für Fan-out-Szenarien.' },
+        { group: 'Eclipse · Jakarta EE', name: 'parsson', text: 'Fix für einen seit 2020 offenen Fehler in Eclipse Parsson, einer Implementierung von Jakarta JSON Processing – gemergt.', href: 'https://github.com/eclipse-ee4j/parsson/pull/174' },
+        { group: 'RFC 9535 · JSONPath', name: 'compliance test suite', text: 'Neue Testfälle für die offizielle Testsuite des JSONPath-Standards – gemergt.', href: 'https://github.com/jsonpath-standard/jsonpath-compliance-test-suite/pull/121' },
+        { group: 'io.github.treetrail', name: 'treetrail', text: 'JSONPath nach RFC 9535 für Java. Version 1.0 besteht alle Fälle der offiziellen Testsuite.', href: 'https://github.com/treetrail/treetrail' },
+        { group: 'Jakarta EE', name: 'jsonp-api', text: 'Vorschlag: JSONPath als Teil von Jakarta JSON Processing – mit Implementierungen und TCK.', href: 'https://github.com/jakartaee/jsonp-api/issues/448' },
+        { group: 'com.christoph-sens', name: '*overflow', text: 's3overflow, sqsoverflow und snsoverflow – Extended Clients für aws-sdk-kotlin: Große SQS- und SNS-Nachrichten wandern automatisch nach S3.', href: 'https://github.com/christoph-sens' },
       ],
     },
     stories: {
@@ -98,20 +106,20 @@ export const homePage: Record<Lang, HomePage> = {
   en: {
     metaTitle: 'Christoph Sens – Kotlin, Java & Spring Boot on AWS',
     metaDescription:
-      'Freelance backend engineer for Kotlin, Java, Spring Boot and AWS. AI-assisted for speed, human for architecture, review and accountability – with more than 15 years of experience.',
+      'Freelance backend engineer for Kotlin, Java, Spring Boot and AWS. AI-assisted for speed, human for architecture, review and accountability – with more than 10 years of experience.',
     hero: {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends that stay calm under load.',
-      lead: 'I build Kotlin and Java backends with Spring Boot on AWS – AI-assisted for speed, human for architecture, review and accountability. With more than 15 years of experience.',
+      lead: 'I build Kotlin and Java backends with Spring Boot on AWS – AI-assisted for speed, human for architecture, review and accountability. With more than 10 years of experience.',
       primary: 'Book an intro call',
       secondary: 'See success stories',
       codeComment: '// Large payloads? They go to S3 automatically.',
     },
     facts: [
-      ['15+', 'years of backend experience'],
-      ['Kotlin & Java', 'at home on the JVM with Spring Boot'],
-      ['AWS', 'SQS, SNS, S3 and more'],
-      ['3 Libraries', 'open source on Maven Central'],
+      ['10+', 'years in software development'],
+      ['70,000', 'market data records aggregated in under a minute in a load test'],
+      ['Kotlin & Java', 'with Spring Boot on AWS'],
+      ['4 Libraries', 'open source on Maven Central'],
     ],
     services: {
       eyebrow: '01 — Services',
@@ -122,7 +130,13 @@ export const homePage: Record<Lang, HomePage> = {
           icon: 'code',
           title: 'Backend development',
           text: 'Robust services in Kotlin and Java: clean APIs, well-designed data models, tests that actually protect something.',
-          bullets: ['Spring Boot services & REST APIs', 'Java-to-Kotlin modernization', 'Test automation'],
+          bullets: ['Spring Boot services & REST APIs', 'Kotlin and Java 25', 'Test automation'],
+        },
+        {
+          icon: 'refresh',
+          title: 'Modernization',
+          text: 'Replacing legacy systems step by step without putting operations at risk – most recently a monolith in the energy sector: in a load test, the new aggregation processed 70,000 market data records in under a minute.',
+          bullets: ['Step-by-step monolith replacement', 'Hexagonal architecture', 'Java and Spring Boot upgrades'],
         },
         {
           icon: 'cloud',
@@ -141,7 +155,7 @@ export const homePage: Record<Lang, HomePage> = {
       more: 'All services in detail →',
     },
     process: {
-      eyebrow: '02 — How I work',
+      eyebrow: '03 — How I work',
       title: 'AI for speed.',
       titleMuted: 'A human for accountability.',
       steps: [
@@ -152,15 +166,17 @@ export const homePage: Record<Lang, HomePage> = {
       ],
     },
     openSource: {
-      eyebrow: '03 — Open Source',
-      title: 'Code you can inspect before you hire me.',
+      eyebrow: '02 — Open Source & Standards',
+      title: 'Code and standards you can check before you hire me.',
       button: 'All projects on GitHub',
       intro:
-        'Extended clients for aws-sdk-kotlin: they automatically offload large SQS and SNS messages to S3 – derived from the AWS Java libraries, built for Kotlin and coroutines.',
+        'I work in the open: on my own libraries on Maven Central and on the standards they build on – from the official JSONPath test suite (RFC 9535) to Jakarta JSON Processing.',
       libs: [
-        { name: 's3overflow', text: 'The foundation: an S3 payload store the other clients build on.' },
-        { name: 'sqsoverflow', text: 'Extended client for Amazon SQS – messages above the size limit go to S3 transparently.' },
-        { name: 'snsoverflow', text: 'Extended client for Amazon SNS – combine it with sqsoverflow for fan-out scenarios.' },
+        { group: 'Eclipse · Jakarta EE', name: 'parsson', text: 'Fix for a bug open since 2020 in Eclipse Parsson, an implementation of Jakarta JSON Processing – merged.', href: 'https://github.com/eclipse-ee4j/parsson/pull/174' },
+        { group: 'RFC 9535 · JSONPath', name: 'compliance test suite', text: 'New test cases for the official test suite of the JSONPath standard – merged.', href: 'https://github.com/jsonpath-standard/jsonpath-compliance-test-suite/pull/121' },
+        { group: 'io.github.treetrail', name: 'treetrail', text: 'RFC 9535 JSONPath for Java. Version 1.0 passes every case of the official test suite.', href: 'https://github.com/treetrail/treetrail' },
+        { group: 'Jakarta EE', name: 'jsonp-api', text: 'Proposal: JSONPath as part of Jakarta JSON Processing – with implementations and a TCK.', href: 'https://github.com/jakartaee/jsonp-api/issues/448' },
+        { group: 'com.christoph-sens', name: '*overflow', text: 's3overflow, sqsoverflow and snsoverflow – extended clients for aws-sdk-kotlin: large SQS and SNS messages move to S3 automatically.', href: 'https://github.com/christoph-sens' },
       ],
     },
     stories: {
@@ -173,20 +189,20 @@ export const homePage: Record<Lang, HomePage> = {
   es: {
     metaTitle: 'Christoph Sens – Kotlin, Java y Spring Boot sobre AWS',
     metaDescription:
-      'Ingeniero backend freelance para Kotlin, Java, Spring Boot y AWS. Con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad – con más de 15 años de experiencia.',
+      'Ingeniero backend freelance para Kotlin, Java, Spring Boot y AWS. Con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad – con más de 10 años de experiencia.',
     hero: {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends que mantienen la calma bajo carga.',
-      lead: 'Desarrollo backends en Kotlin y Java con Spring Boot sobre AWS – con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad. Con más de 15 años de experiencia.',
+      lead: 'Desarrollo backends en Kotlin y Java con Spring Boot sobre AWS – con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad. Con más de 10 años de experiencia.',
       primary: 'Concertar una primera llamada',
       secondary: 'Ver casos de éxito',
       codeComment: '// ¿Payloads grandes? Van a S3 automáticamente.',
     },
     facts: [
-      ['15+', 'años de experiencia en backend'],
-      ['Kotlin y Java', 'en casa en la JVM con Spring Boot'],
-      ['AWS', 'SQS, SNS, S3 y más'],
-      ['3 librerías', 'open source en Maven Central'],
+      ['10+', 'años en desarrollo de software'],
+      ['70.000', 'datos de mercado agregados en menos de un minuto en la prueba de carga'],
+      ['Kotlin y Java', 'con Spring Boot sobre AWS'],
+      ['4 librerías', 'open source en Maven Central'],
     ],
     services: {
       eyebrow: '01 — Servicios',
@@ -197,7 +213,13 @@ export const homePage: Record<Lang, HomePage> = {
           icon: 'code',
           title: 'Desarrollo backend',
           text: 'Servicios robustos en Kotlin y Java: APIs limpias, modelos de datos bien pensados y tests que realmente protegen algo.',
-          bullets: ['Servicios Spring Boot y APIs REST', 'Modernización de Java a Kotlin', 'Automatización de tests'],
+          bullets: ['Servicios Spring Boot y APIs REST', 'Kotlin y Java 25', 'Automatización de tests'],
+        },
+        {
+          icon: 'refresh',
+          title: 'Modernización',
+          text: 'Sustituir sistemas heredados paso a paso sin poner en riesgo la operación – recientemente un monolito del sector energético: en la prueba de carga, la nueva agregación procesó 70.000 datos de mercado en menos de un minuto.',
+          bullets: ['Sustitución gradual de monolitos', 'Arquitectura hexagonal', 'Actualizaciones de Java y Spring Boot'],
         },
         {
           icon: 'cloud',
@@ -216,7 +238,7 @@ export const homePage: Record<Lang, HomePage> = {
       more: 'Todos los servicios en detalle →',
     },
     process: {
-      eyebrow: '02 — Forma de trabajar',
+      eyebrow: '03 — Forma de trabajar',
       title: 'IA para la velocidad.',
       titleMuted: 'Una persona para la responsabilidad.',
       steps: [
@@ -227,15 +249,17 @@ export const homePage: Record<Lang, HomePage> = {
       ],
     },
     openSource: {
-      eyebrow: '03 — Open Source',
-      title: 'Código que puede revisar antes de contratarme.',
+      eyebrow: '02 — Open Source y estándares',
+      title: 'Código y estándares que puede comprobar antes de contratarme.',
       button: 'Todos los proyectos en GitHub',
       intro:
-        'Extended clients para aws-sdk-kotlin: trasladan automáticamente los mensajes grandes de SQS y SNS a S3 – derivados de las librerías Java de AWS, creados para Kotlin y corrutinas.',
+        'Trabajo en abierto: en mis propias librerías en Maven Central y en los estándares sobre los que se construyen – desde la suite de tests oficial de JSONPath (RFC 9535) hasta Jakarta JSON Processing.',
       libs: [
-        { name: 's3overflow', text: 'La base: un payload store en S3 sobre el que se construyen los demás clientes.' },
-        { name: 'sqsoverflow', text: 'Extended client para Amazon SQS – los mensajes que superan el límite pasan a S3 de forma transparente.' },
-        { name: 'snsoverflow', text: 'Extended client para Amazon SNS – combinable con sqsoverflow en escenarios de fan-out.' },
+        { group: 'Eclipse · Jakarta EE', name: 'parsson', text: 'Corrección de un error abierto desde 2020 en Eclipse Parsson, una implementación de Jakarta JSON Processing – integrada.', href: 'https://github.com/eclipse-ee4j/parsson/pull/174' },
+        { group: 'RFC 9535 · JSONPath', name: 'compliance test suite', text: 'Nuevos casos de prueba para la suite de tests oficial del estándar JSONPath – integrados.', href: 'https://github.com/jsonpath-standard/jsonpath-compliance-test-suite/pull/121' },
+        { group: 'io.github.treetrail', name: 'treetrail', text: 'JSONPath según RFC 9535 para Java. La versión 1.0 supera todos los casos de la suite de tests oficial.', href: 'https://github.com/treetrail/treetrail' },
+        { group: 'Jakarta EE', name: 'jsonp-api', text: 'Propuesta: JSONPath como parte de Jakarta JSON Processing – con implementaciones y TCK.', href: 'https://github.com/jakartaee/jsonp-api/issues/448' },
+        { group: 'com.christoph-sens', name: '*overflow', text: 's3overflow, sqsoverflow y snsoverflow – extended clients para aws-sdk-kotlin: los mensajes grandes de SQS y SNS pasan a S3 automáticamente.', href: 'https://github.com/christoph-sens' },
       ],
     },
     stories: {
