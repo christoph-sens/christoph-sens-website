@@ -15,6 +15,8 @@ export interface BlogEntry {
 
 /** Success stories that have their own designed page (in both languages) instead of a blog post. */
 const storyPages: { story: StoryKey; date: string }[] = [
+  { story: 'storyMonolith', date: '2026-11-07' },
+  { story: 'storyTariff', date: '2026-11-07' },
   { story: 'storyKotlin', date: '2026-08-03' },
   { story: 'storyPdf', date: '2024-06-14' },
 ];

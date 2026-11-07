@@ -10,7 +10,7 @@ interface Props {
 
 const { lang, page, alternates } = Astro.props;
 const t = ui[lang];
-const isStory = page === 'storyKotlin' || page === 'storyPdf';
+const isStory = page?.startsWith('story') ?? false;
 const isBlog = Astro.url.pathname.startsWith(routes.blog[lang]);
 
 const links = [
