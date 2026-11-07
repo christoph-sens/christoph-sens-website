@@ -1,10 +1,10 @@
 ---
 title: 'Hexagonal architecture in practice: keeping domain logic and technology apart'
-description: 'While replacing a monolith in the energy sector step by step, I build every new application hexagonally: model, application, adapter and bootstrap as separate Gradle modules, enforced with ArchUnit. What this gives decision-makers, architects and developers – and where it hurts.'
+description: 'While replacing a monolith in the energy sector step by step, I build every new application hexagonally: model, application, adapter and bootstrap as separate Gradle modules, enforced with ArchUnit. What this gives decision-makers, architects and developers, why it speeds up AI-assisted development – and where it hurts.'
 date: 2026-11-07
 key: hexagonale-architektur-in-der-praxis
 category: article
-tags: [Kotlin, Spring Boot, Architecture, Hexagonal Architecture, ArchUnit]
+tags: [Kotlin, Spring Boot, Architecture, Hexagonal Architecture, ArchUnit, AI]
 ---
 
 A meter reading never reaches the market partner. Is the bug in the domain logic, in the rule that decides which reading goes to whom? Or in the technology: the queue, the mapping, the database query, a timeout? In a monolith that has grown over the years, both often live in the same method. Whoever hunts the bug reads both at once – and understands neither properly.
@@ -95,7 +95,7 @@ class MarketCommunicationApplication {
 }
 ```
 
-This way, the use case can be tested with two small fakes – no Spring context, no Testcontainers, in milliseconds. I test the adapters separately against real infrastructure, for example with Testcontainers and LocalStack.
+This way, the use case can be tested with two small fakes – no Spring context, no Testcontainers, in milliseconds. I test the adapters separately against real or simulated infrastructure, for example with Testcontainers and LocalStack.
 
 ## For architects: rules that check themselves
 
@@ -132,6 +132,14 @@ Hexagonal architecture is not a matter of developer taste. It has a direct effec
 
 Against this stands an effort you should plan for honestly.
 
+## Hexagonal architecture and AI: the domain language makes the difference
+
+One point is often overlooked: hexagonal architecture makes AI-assisted development much more effective. The model and the application express the domain in its own language – meter reading, metering point, market partner, market message – without technical clutter.
+
+The developer has to master exactly this domain language. Then they can phrase tickets in domain terms so precisely that an AI implements them almost automatically: the use case is clearly bounded, the ports are named, and the adapters follow a familiar pattern. The AI does not have to guess where something belongs.
+
+The reverse is also true: whoever does not master the domain language writes vague tickets, and the AI fills the gaps with assumptions. That is why responsibility stays with the human. They specify, review the result and decide. The architecture rules help here too: generated code that pulls Spring into the domain gets no green build, just like handwritten code.
+
 ## Where it hurts
 
 The technology is not the problem. Discipline is.
@@ -148,6 +156,7 @@ Even so, I see no reason not to build a backend hexagonally. The onboarding effo
 - Plan onboarding deliberately instead of expecting it to happen on the side.
 - Ask for a template that applies to all new applications – not for one-off solutions per team.
 - Require the rules to be checked in the build. Documentation alone is not enough.
+- Invest in your developers' domain knowledge. With AI-assisted development, it pays off twice.
 
 **For architects:**
 - Separate model, application, adapter and bootstrap into their own modules, not just packages.
@@ -156,7 +165,8 @@ Even so, I see no reason not to build a backend hexagonally. The onboarding effo
 
 **For developers:**
 - Write the use case first and the adapters afterwards.
-- Test the domain without Spring and the adapters against real infrastructure.
+- Learn the domain language. It is the best specification – for people and for AI.
+- Test the domain without Spring and the adapters against real or simulated infrastructure.
 - If you need a framework annotation in the model or the application, treat it as a warning sign, not an exception.
 
 Hexagonal architecture does not automatically make a backend good. But it makes visible where it is good and where it is not – and for an application that is meant to run for a long time, that is worth a lot.

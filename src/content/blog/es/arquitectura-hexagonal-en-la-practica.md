@@ -1,10 +1,10 @@
 ---
 title: 'Arquitectura hexagonal en la práctica: separar con limpieza el negocio y la técnica'
-description: 'Mientras sustituyo paso a paso un monolito en el sector energético, construyo cada nueva aplicación de forma hexagonal: model, application, adapter y bootstrap como módulos de Gradle propios, asegurados con ArchUnit. Qué aporta a quienes deciden, a arquitectos y a desarrolladores – y dónde duele.'
+description: 'Mientras sustituyo paso a paso un monolito en el sector energético, construyo cada nueva aplicación de forma hexagonal: model, application, adapter y bootstrap como módulos de Gradle propios, asegurados con ArchUnit. Qué aporta a quienes deciden, a arquitectos y a desarrolladores, por qué acelera el desarrollo con apoyo de IA – y dónde duele.'
 date: 2026-11-07
 key: hexagonale-architektur-in-der-praxis
 category: article
-tags: [Kotlin, Spring Boot, Arquitectura, Arquitectura hexagonal, ArchUnit]
+tags: [Kotlin, Spring Boot, Arquitectura, Arquitectura hexagonal, ArchUnit, IA]
 ---
 
 Una lectura de contador no llega al participante del mercado. ¿Está el error en la lógica de negocio, en la regla que decide qué lectura va a quién? ¿O en la técnica: en la cola, en el mapeo, en la consulta a la base de datos, en un timeout? En un monolito que ha crecido durante años, ambas cosas suelen estar en el mismo método. Quien busca el error lee las dos a la vez – y no entiende bien ninguna.
@@ -95,7 +95,7 @@ class MarketCommunicationApplication {
 }
 ```
 
-Así, el caso de uso se puede probar con dos pequeños fakes, sin contexto de Spring, sin Testcontainers, en milisegundos. Los adaptadores los pruebo por separado contra infraestructura real, por ejemplo con Testcontainers y LocalStack.
+Así, el caso de uso se puede probar con dos pequeños fakes, sin contexto de Spring, sin Testcontainers, en milisegundos. Los adaptadores los pruebo por separado contra infraestructura real o simulada, por ejemplo con Testcontainers y LocalStack.
 
 ## Para arquitectos: reglas que se comprueban solas
 
@@ -132,6 +132,14 @@ La arquitectura hexagonal no es una cuestión de gusto de los desarrolladores. I
 
 Frente a esto hay un esfuerzo que conviene planificar con honestidad.
 
+## Arquitectura hexagonal e IA: el lenguaje del negocio marca la diferencia
+
+Hay un punto que a menudo se pasa por alto: la arquitectura hexagonal hace mucho más eficaz el desarrollo con apoyo de IA. En el model y en la application, el negocio se expresa en su propio lenguaje – lectura de contador, punto de medida, participante del mercado, mensaje de mercado – sin adornos técnicos.
+
+Precisamente ese lenguaje del negocio es el que el desarrollador debe dominar. Entonces puede formular los tickets en términos de negocio con tanta precisión que una IA los implementa de forma casi automática: el caso de uso está claramente delimitado, los puertos tienen nombre y los adaptadores siguen un patrón conocido. La IA no tiene que adivinar dónde va cada cosa.
+
+A la inversa: quien no domina el lenguaje del negocio escribe tickets imprecisos, y la IA rellena los huecos con suposiciones. Por eso la responsabilidad sigue siendo de la persona. Especifica, revisa el resultado y decide. También aquí ayudan las reglas de arquitectura: el código generado que mete Spring en el negocio no obtiene un build en verde, igual que el código escrito a mano.
+
 ## Dónde duele
 
 La técnica no es el problema. El problema es la disciplina.
@@ -148,6 +156,7 @@ Aun así, no veo ninguna razón para no construir un backend de forma hexagonal.
 - Planifique la formación de forma consciente, en lugar de esperar que ocurra de paso.
 - Pida una plantilla que valga para todas las aplicaciones nuevas – no soluciones aisladas por equipo.
 - Exija que las reglas se comprueben en el build. La documentación por sí sola no basta.
+- Invierta en el conocimiento del negocio de sus desarrolladores. Con el desarrollo apoyado en IA, se amortiza por partida doble.
 
 **Para arquitectos:**
 - Separe model, application, adapter y bootstrap en módulos propios, no solo en paquetes.
@@ -156,7 +165,8 @@ Aun así, no veo ninguna razón para no construir un backend de forma hexagonal.
 
 **Para desarrolladores:**
 - Escriba primero el caso de uso y después los adaptadores.
-- Pruebe el negocio sin Spring y los adaptadores contra infraestructura real.
+- Aprenda el lenguaje del negocio. Es la mejor especificación – para las personas y para la IA.
+- Pruebe el negocio sin Spring y los adaptadores contra infraestructura real o simulada.
 - Si necesita una anotación de framework en el model o en la application, tómelo como una señal de alarma, no como una excepción.
 
 La arquitectura hexagonal no hace que un backend sea bueno de forma automática. Pero deja ver dónde es bueno y dónde no – y en una aplicación que debe funcionar durante mucho tiempo, eso vale mucho.
