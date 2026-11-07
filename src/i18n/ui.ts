@@ -3,12 +3,22 @@ export const languages = ['en', 'de', 'es'] as const;
 export const defaultLang = languages[0];
 export type Lang = (typeof languages)[number];
 
-export type PageKey = 'home' | 'services' | 'storyKotlin' | 'storyPdf' | 'blog' | 'imprint' | 'privacy';
+export type PageKey = 'home' | 'services' | 'storyMonolith' | 'storyTariff' | 'storyKotlin' | 'storyPdf' | 'blog' | 'imprint' | 'privacy';
 
 /** URL of every page in every language. Keeps the language switcher and hreflang links in sync. */
 export const routes: Record<PageKey, Record<Lang, string>> = {
   home: { en: '/', de: '/de/', es: '/es/' },
   services: { en: '/services/', de: '/de/leistungen/', es: '/es/servicios/' },
+  storyMonolith: {
+    en: '/success-stories/monolith-replacement/',
+    de: '/de/success-stories/abloesung-eines-monolithen/',
+    es: '/es/casos-de-exito/sustitucion-de-un-monolito/',
+  },
+  storyTariff: {
+    en: '/success-stories/tariff-change-e-mobility/',
+    de: '/de/success-stories/tarifwechsel-e-mobilitaet/',
+    es: '/es/casos-de-exito/cambio-de-tarifas-movilidad-electrica/',
+  },
   storyKotlin: {
     en: '/success-stories/kotlin-extended-clients/',
     de: '/de/success-stories/kotlin-extended-clients/',

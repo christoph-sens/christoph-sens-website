@@ -51,7 +51,8 @@ export const servicesPage: Record<Lang, ServicesPage> = {
       {
         title: 'Modernisierung bestehender Systeme',
         text: 'Ältere Systeme schrittweise auf einen aktuellen Stand bringen, ohne den Betrieb zu gefährden – mit klaren Entscheidungen statt mechanischer Übersetzung.',
-        tasks: ['Java-Code nach Kotlin überführen', 'Abhängigkeiten mit Sicherheitshinweisen ablösen', 'Lizenzrechtliche Prüfung eingesetzter Bibliotheken', 'Technologieauswahl mit Prototypen absichern'],
+        tasks: ['Monolithen schrittweise ablösen', 'Hexagonale Architektur einführen', 'Java- und Spring-Boot-Upgrades', 'Abhängigkeiten mit Sicherheitshinweisen ablösen', 'Java-Code nach Kotlin überführen'],
+        example: { label: 'Beispiel: Ablösung eines Monolithen →', story: 'storyMonolith' },
       },
       {
         title: 'KI-gestützte Entwicklung',
@@ -87,7 +88,8 @@ export const servicesPage: Record<Lang, ServicesPage> = {
       {
         title: 'Modernizing existing systems',
         text: 'Bringing older systems up to date step by step without putting operations at risk – with clear decisions instead of mechanical translation.',
-        tasks: ['Migrating Java code to Kotlin', 'Replacing dependencies that carry security advisories', 'License review of the libraries in use', 'Validating technology choices with prototypes'],
+        tasks: ['Replacing monoliths step by step', 'Introducing hexagonal architecture', 'Java and Spring Boot upgrades', 'Replacing dependencies that carry security advisories', 'Migrating Java code to Kotlin'],
+        example: { label: 'Example: replacing a monolith →', story: 'storyMonolith' },
       },
       {
         title: 'AI-assisted development',
@@ -123,7 +125,8 @@ export const servicesPage: Record<Lang, ServicesPage> = {
       {
         title: 'Modernización de sistemas existentes',
         text: 'Actualizar sistemas antiguos paso a paso sin poner en riesgo la operación – con decisiones claras en lugar de una traducción mecánica.',
-        tasks: ['Migrar código Java a Kotlin', 'Sustituir dependencias con avisos de seguridad', 'Revisión de licencias de las librerías utilizadas', 'Validar la elección tecnológica con prototipos'],
+        tasks: ['Sustituir monolitos paso a paso', 'Introducir arquitectura hexagonal', 'Actualizaciones de Java y Spring Boot', 'Sustituir dependencias con avisos de seguridad', 'Migrar código Java a Kotlin'],
+        example: { label: 'Ejemplo: sustitución de un monolito →', story: 'storyMonolith' },
       },
       {
         title: 'Desarrollo con apoyo de IA',

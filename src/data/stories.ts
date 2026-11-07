@@ -30,7 +30,7 @@ export interface Story {
   sections: StorySection[];
 }
 
-export type StoryKey = 'storyKotlin' | 'storyPdf';
+export type StoryKey = 'storyMonolith' | 'storyTariff' | 'storyKotlin' | 'storyPdf';
 
 const kotlinClass = (comment1: string, comment2: string) => `<span class="tok-kw">class</span> SqsExtendedClient(
     <span class="tok-kw">private val</span> sqsClient: SqsClient,
@@ -60,7 +60,348 @@ const pdfStack: Block = {
 
 const pdfRepo = 'https://github.com/christoph-sens/pdf-generator';
 
+const monolithStack: Block = {
+  type: 'chips',
+  items: ['Kotlin', 'Java 25', 'Spring Boot 4', 'AWS S3', 'SQS', 'SNS', 'EKS', 'Aurora PostgreSQL', 'Terraform', 'Kubernetes', 'Flyway', 'Testcontainers', 'WireMock', 'LocalStack'],
+};
+
+const tariffStack: Block = {
+  type: 'chips',
+  items: ['Java', 'Quarkus', 'AWS ECS', 'ECR', 'Aurora', 'Route 53', 'WAF', 'Terraform', 'GitLab CI', 'PostgreSQL', 'Hibernate', 'OpenAPI'],
+};
+
 export const stories: Record<StoryKey, Record<Lang, Story>> = {
+  storyMonolith: {
+    de: {
+      tags: 'Kotlin · Java · Spring Boot · AWS',
+      title: 'Einen Monolithen ablösen, ohne den Betrieb zu gefährden',
+      teaser:
+        'Ein Energieversorger löst einen nicht mehr wartbaren PHP-Monolithen für die Marktkommunikation schrittweise ab. Die neue Aggregation verarbeitet im Lasttest 70.000 Marktdaten in unter einer Minute.',
+      metaDescription:
+        'Success Story: schrittweise Ablösung eines PHP-Monolithen in der Energiewirtschaft mit Kotlin, Spring Boot und AWS – hexagonale Architektur, 70.000 Marktdaten im Lasttest in unter einer Minute aggregiert.',
+      lead: 'Bei einem Energieversorger läuft die Marktkommunikation – An- und Abmeldungen, Zählerstände – über einen PHP-Monolithen, der als nicht mehr wartbar gilt. Er muss abgelöst werden, ohne dass der Betrieb stockt.',
+      glance: [
+        ['Aufgabe', 'Versand und Aufbereitung von Marktdaten aus dem Monolithen herauslösen – Schritt für Schritt und im laufenden Betrieb.'],
+        ['Lösung', 'Neue Anwendungen und Bibliotheken in Kotlin und Java mit Spring Boot auf AWS, aufgebaut nach hexagonaler Architektur.'],
+        ['Ergebnis', 'Der gesamte Versand von Marktdaten läuft über die neuen Anwendungen. Die Aggregation verarbeitet im Lasttest 70.000 Marktdaten in unter einer Minute, und der Monolith läuft stabiler.'],
+      ],
+      facts: [
+        ['70.000', 'Marktdaten im Lasttest in unter einer Minute aggregiert'],
+        ['≈ 10 %', 'des Monolithen abgelöst'],
+        ['6', 'Bibliotheken und Anwendungen gebaut'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Ausgangslage',
+          title: 'Ein System, das niemand mehr anfassen will',
+          blocks: [
+            { type: 'p', html: 'Der Monolith verschickt Marktnachrichten an andere Marktteilnehmer und fasst Marktdaten zusammen. Er gilt als nicht mehr wartbar, und große Datenmengen zu aggregieren war für ihn eine fast unlösbare Aufgabe.' },
+            { type: 'p', html: 'Ihn in einem Schritt zu ersetzen, wäre zu riskant gewesen. Deshalb wird er Stück für Stück abgelöst: Jede neue Anwendung übernimmt einen klar abgegrenzten Teil.' },
+          ],
+        },
+        {
+          eyebrow: 'Architektur',
+          title: 'Hexagonal – und eine Vorlage für die Abteilung',
+          blocks: [
+            { type: 'p', html: 'Ich habe die neuen Anwendungen nach hexagonaler Architektur aufgebaut: Die Fachlogik kennt weder Datenbank noch Messaging. Adapter für AWS, PostgreSQL und Schnittstellen sind austauschbar und einzeln testbar.' },
+            { type: 'p', html: 'Dieser Aufbau dient in der Abteilung inzwischen als Vorlage für weitere Anwendungen.' },
+            {
+              type: 'list',
+              items: [
+                '6 Bibliotheken und Anwendungen in Kotlin und Java',
+                'Messaging über SQS und SNS, Daten in S3 und Aurora PostgreSQL',
+                'Tests mit Testcontainers, WireMock und LocalStack',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Ergebnis',
+          title: 'Schneller und stabiler',
+          blocks: [
+            { type: 'p', html: 'Der gesamte Versand von Marktdaten läuft heute über die neuen Anwendungen, ebenso ihre Aggregation und Zusammenfassung. Rund 10 % des Monolithen sind abgelöst, und der verbleibende Teil läuft seitdem stabiler.' },
+            { type: 'p', html: 'Im ersten Lasttest hat die neue Aggregation 70.000 Marktdaten in unter einer Minute verarbeitet. Für das Altsystem war das praktisch nicht zu leisten.' },
+          ],
+        },
+        {
+          eyebrow: 'Wartbarkeit',
+          title: 'Damit das Neue nicht das nächste Altsystem wird',
+          blocks: [
+            { type: 'p', html: 'Ich habe die neuen Anwendungen von Java 21 auf Java 25 und von Spring Boot 3 auf Spring Boot 4 gehoben und Renovate eingeführt. Abhängigkeiten werden seitdem automatisch aktuell gehalten.' },
+            monolithStack,
+          ],
+        },
+      ],
+    },
+    en: {
+      tags: 'Kotlin · Java · Spring Boot · AWS',
+      title: 'Replacing a monolith without putting operations at risk',
+      teaser:
+        'An energy supplier is replacing an unmaintainable PHP monolith for market communication step by step. In a load test, the new aggregation processed 70,000 market data records in under a minute.',
+      metaDescription:
+        'Success story: step-by-step replacement of a PHP monolith in the energy sector with Kotlin, Spring Boot and AWS – hexagonal architecture, 70,000 market data records aggregated in under a minute in a load test.',
+      lead: 'At an energy supplier, market communication – registrations, deregistrations, meter readings – runs through a PHP monolith that is considered unmaintainable. It has to be replaced without operations grinding to a halt.',
+      glance: [
+        ['Task', 'Move the sending and processing of market data out of the monolith – step by step, while the system keeps running.'],
+        ['Solution', 'New applications and libraries in Kotlin and Java with Spring Boot on AWS, built on a hexagonal architecture.'],
+        ['Result', 'All market data is now sent through the new applications. In a load test, the aggregation processed 70,000 records in under a minute, and the monolith runs more stably.'],
+      ],
+      facts: [
+        ['70,000', 'market data records aggregated in under a minute in a load test'],
+        ['≈ 10%', 'of the monolith replaced'],
+        ['6', 'libraries and applications built'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Starting point',
+          title: 'A system nobody wants to touch',
+          blocks: [
+            { type: 'p', html: 'The monolith sends market messages to other market participants and aggregates market data. It is considered unmaintainable, and aggregating large volumes of data was an almost impossible task for it.' },
+            { type: 'p', html: 'Replacing it in one go would have been too risky. So it is being replaced piece by piece: each new application takes over a clearly defined part.' },
+          ],
+        },
+        {
+          eyebrow: 'Architecture',
+          title: 'Hexagonal – and a template for the department',
+          blocks: [
+            { type: 'p', html: 'I built the new applications on a hexagonal architecture: the domain logic knows nothing about databases or messaging. Adapters for AWS, PostgreSQL and interfaces are interchangeable and can be tested on their own.' },
+            { type: 'p', html: 'The department now uses this structure as a template for further applications.' },
+            {
+              type: 'list',
+              items: [
+                '6 libraries and applications in Kotlin and Java',
+                'Messaging via SQS and SNS, data in S3 and Aurora PostgreSQL',
+                'Tests with Testcontainers, WireMock and LocalStack',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Result',
+          title: 'Faster and more stable',
+          blocks: [
+            { type: 'p', html: 'All market data is now sent through the new applications, and they also handle its aggregation and summarization. About 10% of the monolith has been replaced, and the remaining part has been running more stably since.' },
+            { type: 'p', html: 'In the first load test, the new aggregation processed 70,000 market data records in under a minute. For the legacy system, that was practically out of reach.' },
+          ],
+        },
+        {
+          eyebrow: 'Maintainability',
+          title: 'So the new system does not become the next legacy system',
+          blocks: [
+            { type: 'p', html: 'I upgraded the new applications from Java 21 to Java 25 and from Spring Boot 3 to Spring Boot 4, and introduced Renovate. Dependencies have been kept up to date automatically ever since.' },
+            monolithStack,
+          ],
+        },
+      ],
+    },
+    es: {
+      tags: 'Kotlin · Java · Spring Boot · AWS',
+      title: 'Sustituir un monolito sin poner en riesgo la operación',
+      teaser:
+        'Una empresa energética sustituye paso a paso un monolito PHP ya imposible de mantener para la comunicación de mercado. En la prueba de carga, la nueva agregación procesó 70.000 datos de mercado en menos de un minuto.',
+      metaDescription:
+        'Caso de éxito: sustitución gradual de un monolito PHP en el sector energético con Kotlin, Spring Boot y AWS – arquitectura hexagonal, 70.000 datos de mercado agregados en menos de un minuto en la prueba de carga.',
+      lead: 'En una empresa energética, la comunicación de mercado – altas, bajas, lecturas de contadores – pasa por un monolito PHP que se considera imposible de mantener. Hay que sustituirlo sin que la operación se detenga.',
+      glance: [
+        ['Tarea', 'Sacar del monolito el envío y el procesamiento de los datos de mercado – paso a paso y con el sistema en marcha.'],
+        ['Solución', 'Nuevas aplicaciones y librerías en Kotlin y Java con Spring Boot sobre AWS, construidas con arquitectura hexagonal.'],
+        ['Resultado', 'Todo el envío de datos de mercado pasa ya por las nuevas aplicaciones. En la prueba de carga, la agregación procesó 70.000 datos en menos de un minuto, y el monolito funciona de forma más estable.'],
+      ],
+      facts: [
+        ['70.000', 'datos de mercado agregados en menos de un minuto en la prueba de carga'],
+        ['≈ 10 %', 'del monolito sustituido'],
+        ['6', 'librerías y aplicaciones construidas'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Punto de partida',
+          title: 'Un sistema que nadie quiere tocar',
+          blocks: [
+            { type: 'p', html: 'El monolito envía mensajes de mercado a otros participantes del mercado y agrega datos de mercado. Se considera imposible de mantener, y agregar grandes volúmenes de datos era para él una tarea casi imposible.' },
+            { type: 'p', html: 'Sustituirlo de una sola vez habría sido demasiado arriesgado. Por eso se sustituye pieza a pieza: cada nueva aplicación asume una parte claramente delimitada.' },
+          ],
+        },
+        {
+          eyebrow: 'Arquitectura',
+          title: 'Hexagonal – y una plantilla para el departamento',
+          blocks: [
+            { type: 'p', html: 'Construí las nuevas aplicaciones con arquitectura hexagonal: la lógica de negocio no sabe nada de bases de datos ni de mensajería. Los adaptadores para AWS, PostgreSQL e interfaces son intercambiables y se pueden probar por separado.' },
+            { type: 'p', html: 'Hoy el departamento usa esta estructura como plantilla para otras aplicaciones.' },
+            {
+              type: 'list',
+              items: [
+                '6 librerías y aplicaciones en Kotlin y Java',
+                'Mensajería con SQS y SNS, datos en S3 y Aurora PostgreSQL',
+                'Tests con Testcontainers, WireMock y LocalStack',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Resultado',
+          title: 'Más rápido y más estable',
+          blocks: [
+            { type: 'p', html: 'Todo el envío de datos de mercado pasa hoy por las nuevas aplicaciones, que también se encargan de su agregación y resumen. Alrededor del 10 % del monolito está sustituido, y la parte restante funciona desde entonces de forma más estable.' },
+            { type: 'p', html: 'En la primera prueba de carga, la nueva agregación procesó 70.000 datos de mercado en menos de un minuto. Para el sistema antiguo, eso era prácticamente inalcanzable.' },
+          ],
+        },
+        {
+          eyebrow: 'Mantenibilidad',
+          title: 'Para que lo nuevo no se convierta en el próximo sistema heredado',
+          blocks: [
+            { type: 'p', html: 'Actualicé las nuevas aplicaciones de Java 21 a Java 25 y de Spring Boot 3 a Spring Boot 4, e introduje Renovate. Desde entonces, las dependencias se mantienen al día de forma automática.' },
+            monolithStack,
+          ],
+        },
+      ],
+    },
+  },
+  storyTariff: {
+    de: {
+      tags: 'Java · Quarkus · AWS · E-Mobilität',
+      title: 'Tarifwechsel in der E-Mobilität – pünktlich zum Jahreswechsel',
+      teaser:
+        'Zum Jahreswechsel ändern sich die Ladetarife eines Automobilherstellers. Die Umstellung im Abrechnungs-Backend wollte kaum jemand anfassen – ich habe sie als neues Teammitglied übernommen.',
+      metaDescription:
+        'Success Story: Tarifwechsel im Backend für Abrechnung und Zahlung beim Laden von Elektrofahrzeugen – Java, Quarkus und AWS bei einem Automobilhersteller.',
+      lead: 'Ein Automobilhersteller bietet seinen Kunden das Laden von Elektrofahrzeugen an – an Ladestationen und mit einer Lade-App auch zu Hause. Zum Jahreswechsel ändern sich die Tarife, und das Backend für Abrechnung und Zahlung muss pünktlich mitziehen.',
+      glance: [
+        ['Aufgabe', 'Die neuen Tarife zum Jahreswechsel im Backend für Abrechnung und Zahlung umsetzen.'],
+        ['Lösung', 'Umsetzung im Quarkus-Backend, abgesichert durch automatisierte Tests und ausgerollt über GitLab CI, Terraform und AWS.'],
+        ['Ergebnis', 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten wurde mir die technische Leitung des Teams übertragen.'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Ausgangslage',
+          title: 'Eine Aufgabe, die keiner wollte',
+          blocks: [
+            { type: 'p', html: 'Ein Tarifwechsel betrifft direkt das Geld der Kunden: Jeder Ladevorgang muss zum richtigen Tarif abgerechnet werden, und der Stichtag steht fest. Entsprechend groß war im Team der Respekt vor der Aufgabe.' },
+            { type: 'p', html: 'Ich war gerade neu im Team und habe sie direkt übernommen.' },
+          ],
+        },
+        {
+          eyebrow: 'Umsetzung',
+          title: 'Im Backend für Abrechnung und Zahlung',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                'Backend-Services mit Java und Quarkus',
+                'Anbindung interner und externer Systeme per REST und OpenAPI',
+                'Automatisierte Tests ausgebaut',
+                'CI/CD mit GitLab CI, Terraform und AWS',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Ergebnis',
+          title: 'Vertrauen, das bleibt',
+          blocks: [
+            { type: 'p', html: 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten wurde mir die technische Leitung des Scrum-Teams mit 8 Personen übertragen. In dieser Rolle habe ich neue Schnittstellen für neue Funktionen verantwortet.' },
+            { type: 'p', html: 'Parallel haben die Teams eine Lade-App für das Laden zu Hause auf die Beine gestellt.' },
+            tariffStack,
+          ],
+        },
+      ],
+    },
+    en: {
+      tags: 'Java · Quarkus · AWS · E-mobility',
+      title: 'A tariff change in e-mobility – on time for the new year',
+      teaser:
+        'At the turn of the year, a car maker’s charging tariffs change. Hardly anyone wanted to take on the change in the billing backend – I took it on as a new team member.',
+      metaDescription:
+        'Success story: tariff change in the billing and payment backend for electric vehicle charging – Java, Quarkus and AWS at a car maker.',
+      lead: 'A car maker offers its customers charging for electric vehicles – at charging stations and, with a charging app, at home. At the turn of the year the tariffs change, and the billing and payment backend has to follow on time.',
+      glance: [
+        ['Task', 'Implement the new tariffs in the billing and payment backend in time for the new year.'],
+        ['Solution', 'Implemented in the Quarkus backend, covered by automated tests and rolled out with GitLab CI, Terraform and AWS.'],
+        ['Result', 'The new tariffs were in place for the new year. After three months, I was given technical leadership of the team.'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Starting point',
+          title: 'A task nobody wanted',
+          blocks: [
+            { type: 'p', html: 'A tariff change touches customers’ money directly: every charging session has to be billed at the right tariff, and the deadline is fixed. Accordingly, the team had a lot of respect for the task.' },
+            { type: 'p', html: 'I had just joined the team and took it on straight away.' },
+          ],
+        },
+        {
+          eyebrow: 'Implementation',
+          title: 'In the billing and payment backend',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                'Backend services with Java and Quarkus',
+                'Internal and external systems connected via REST and OpenAPI',
+                'Automated tests extended',
+                'CI/CD with GitLab CI, Terraform and AWS',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Result',
+          title: 'Trust that lasts',
+          blocks: [
+            { type: 'p', html: 'The new tariffs were in place for the new year. After three months, I was given technical leadership of the eight-person Scrum team. In that role, I was responsible for new interfaces for new features.' },
+            { type: 'p', html: 'In parallel, the teams built a charging app for charging at home.' },
+            tariffStack,
+          ],
+        },
+      ],
+    },
+    es: {
+      tags: 'Java · Quarkus · AWS · Movilidad eléctrica',
+      title: 'Cambio de tarifas en la movilidad eléctrica – a tiempo para el año nuevo',
+      teaser:
+        'Con el cambio de año cambian las tarifas de carga de un fabricante de automóviles. Casi nadie quería encargarse del cambio en el backend de facturación – yo lo asumí como nuevo miembro del equipo.',
+      metaDescription:
+        'Caso de éxito: cambio de tarifas en el backend de facturación y pago para la carga de vehículos eléctricos – Java, Quarkus y AWS en un fabricante de automóviles.',
+      lead: 'Un fabricante de automóviles ofrece a sus clientes la carga de vehículos eléctricos – en estaciones de carga y, con una app de carga, también en casa. Con el cambio de año cambian las tarifas, y el backend de facturación y pago tiene que adaptarse a tiempo.',
+      glance: [
+        ['Tarea', 'Implementar las nuevas tarifas en el backend de facturación y pago para el cambio de año.'],
+        ['Solución', 'Implementación en el backend con Quarkus, asegurada con tests automatizados y desplegada con GitLab CI, Terraform y AWS.'],
+        ['Resultado', 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses se me confió el liderazgo técnico del equipo.'],
+      ],
+      sections: [
+        {
+          eyebrow: 'Punto de partida',
+          title: 'Una tarea que nadie quería',
+          blocks: [
+            { type: 'p', html: 'Un cambio de tarifas afecta directamente al dinero de los clientes: cada carga debe facturarse con la tarifa correcta, y la fecha es fija. Por eso el equipo tenía mucho respeto a la tarea.' },
+            { type: 'p', html: 'Yo acababa de incorporarme al equipo y la asumí de inmediato.' },
+          ],
+        },
+        {
+          eyebrow: 'Implementación',
+          title: 'En el backend de facturación y pago',
+          blocks: [
+            {
+              type: 'list',
+              items: [
+                'Servicios backend con Java y Quarkus',
+                'Integración de sistemas internos y externos mediante REST y OpenAPI',
+                'Ampliación de los tests automatizados',
+                'CI/CD con GitLab CI, Terraform y AWS',
+              ],
+            },
+          ],
+        },
+        {
+          eyebrow: 'Resultado',
+          title: 'Una confianza que perdura',
+          blocks: [
+            { type: 'p', html: 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses se me confió el liderazgo técnico del equipo Scrum de 8 personas. En ese papel fui responsable de nuevas interfaces para nuevas funciones.' },
+            { type: 'p', html: 'En paralelo, los equipos pusieron en marcha una app para cargar en casa.' },
+            tariffStack,
+          ],
+        },
+      ],
+    },
+  },
   storyKotlin: {
     de: {
       tags: 'Kotlin · AWS · Open Source',
@@ -554,6 +895,8 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
 };
 
 export const nextStory: Record<StoryKey, StoryKey> = {
+  storyMonolith: 'storyTariff',
+  storyTariff: 'storyKotlin',
   storyKotlin: 'storyPdf',
-  storyPdf: 'storyKotlin',
+  storyPdf: 'storyMonolith',
 };
