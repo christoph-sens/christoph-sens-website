@@ -1,5 +1,5 @@
 ---
-import { routes, ui, type Lang } from '../i18n/ui';
+import { feeds, routes, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -15,6 +15,7 @@ const t = ui[lang].footer;
     <span class="links">
       <a href={routes.imprint[lang]}>{t.imprint}</a>
       <a href={routes.privacy[lang]}>{t.privacy}</a>
+      <a href={feeds[lang]}>RSS</a>
     </span>
   </div>
 </footer>

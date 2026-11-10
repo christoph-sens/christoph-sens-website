@@ -35,7 +35,7 @@ export const homePage: Record<Lang, HomePage> = {
     facts: [
       ['10+', 'Jahre in der Softwareentwicklung'],
       ['70.000', 'Marktdaten im Lasttest in unter einer Minute aggregiert'],
-      ['Kotlin & Java', 'mit Spring Boot auf AWS'],
+      ['99,9 %', 'Verfügbarkeit: Ein überlastetes Altsystem erfüllt seine SLA wieder'],
       ['4 Libraries', 'Open Source auf Maven Central'],
     ],
     services: {
@@ -118,7 +118,7 @@ export const homePage: Record<Lang, HomePage> = {
     facts: [
       ['10+', 'years in software development'],
       ['70,000', 'market data records aggregated in under a minute in a load test'],
-      ['Kotlin & Java', 'with Spring Boot on AWS'],
+      ['99.9%', 'availability: an overloaded legacy system meets its SLA again'],
       ['4 Libraries', 'open source on Maven Central'],
     ],
     services: {
@@ -201,7 +201,7 @@ export const homePage: Record<Lang, HomePage> = {
     facts: [
       ['10+', 'años en desarrollo de software'],
       ['70.000', 'datos de mercado agregados en menos de un minuto en la prueba de carga'],
-      ['Kotlin y Java', 'con Spring Boot sobre AWS'],
+      ['99,9 %', 'de disponibilidad: un sistema legado sobrecargado vuelve a cumplir su SLA'],
       ['4 librerías', 'open source en Maven Central'],
     ],
     services: {

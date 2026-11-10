@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { defaultLang, languages, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+import { defaultLang, external, feeds, languages, ogImage, routes, ui, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -17,13 +17,47 @@ interface Props {
   contact?: boolean;
   /** Keep the page out of search results (e.g. the 404 page). */
   noindex?: boolean;
+  /** Publication dates of a blog post; marks the page as an article for link previews and search engines. */
+  article?: { published: Date; modified?: Date };
 }
 
-const { lang, page, title, description, contact = true, noindex = false } = Astro.props;
+const { lang, page, title, description, contact = true, noindex = false, article } = Astro.props;
 const site = Astro.site ?? new URL('https://www.christoph-sens.com');
 const alternates: Partial<Record<Lang, string>> = page ? routes[page] : (Astro.props.alternates ?? {});
 const translated = languages.every((l) => alternates[l]);
 const canonical = new URL(alternates[lang] ?? '/', site);
+const image = new URL(ogImage[lang], site);
+
+const person = {
+  '@type': 'Person',
+  '@id': new URL('/#christoph-sens', site).href,
+  name: 'Christoph Sens',
+  url: new URL(routes.home[lang], site).href,
+  jobTitle: ui[lang].jobTitle,
+  knowsAbout: ['Kotlin', 'Java', 'Spring Boot', 'Amazon Web Services', 'Software architecture'],
+  sameAs: [external.github],
+};
+
+/** Structured data: the person on the home page, the article with its author on blog posts. */
+const structuredData = article
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title.replace(/ – Christoph Sens$/, ''),
+      description,
+      inLanguage: lang,
+      datePublished: article.published.toISOString(),
+      dateModified: (article.modified ?? article.published).toISOString(),
+      mainEntityOfPage: canonical.href,
+      image: image.href,
+      author: person,
+      publisher: person,
+    }
+  : page === 'home'
+    ? { '@context': 'https://schema.org', ...person, description, image: image.href }
+    : undefined;
+// "<" must not appear literally inside a script element.
+const structuredDataJson = structuredData && JSON.stringify(structuredData).replaceAll('<', '\\u003c');
 ---
 
 <!doctype html>
@@ -36,12 +70,26 @@ const canonical = new URL(alternates[lang] ?? '/', site);
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     {translated && languages.map((l) => <link rel="alternate" hreflang={l} href={new URL(alternates[l]!, site)} />)}
     {translated && <link rel="alternate" hreflang="x-default" href={new URL(alternates[defaultLang]!, site)} />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:site_name" content="Christoph Sens" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ui[lang].ogLocale} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ui[lang].ogImageAlt} />
+    {article && <meta property="article:published_time" content={article.published.toISOString()} />}
+    {article?.modified && <meta property="article:modified_time" content={article.modified.toISOString()} />}
+    {article && <meta property="article:author" content="Christoph Sens" />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/rss+xml" title={ui[lang].blog.title} href={feeds[lang]} />
+    {/* A data block, not a script: nothing runs, so the script-less CSP stays intact. */}
+    {structuredDataJson && <script is:inline type="application/ld+json" set:html={structuredDataJson} />}
   </head>
   <body>
     {/* Keeps Cloudflare's Email Obfuscation from rewriting mailto links: its decoder script is blocked by our CSP. */}

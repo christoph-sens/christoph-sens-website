@@ -71,7 +71,7 @@ const icons = {
         </div>
         <p class="muted head-aside">{t.services.intro}</p>
       </div>
-      <div class="grid-auto">
+      <div class="quad">
         {
           t.services.items.map((s) => (
             <article class:list={['service', s.dark ? 'card-dark' : 'card']}>
@@ -103,7 +103,7 @@ const icons = {
         <a class="btn btn-ghost" href={external.github}>{t.openSource.button}</a>
       </div>
       <p class="muted os-intro">{t.openSource.intro}</p>
-      <div class="grid-auto" style="--min: 340px">
+      <div class="libs">
         {
           t.openSource.libs.map((lib) => (
             <a class="card card-link lib" href={lib.href}>
@@ -240,10 +240,37 @@ const icons = {
     color: var(--muted);
   }
 
+  /* Facts, services and steps come in fours: four columns, then two, then one – never three plus a
+     leftover. */
+  .facts,
+  .quad,
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 1180px) {
+    .facts,
+    .quad,
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 600px) {
+    .facts,
+    .quad,
+    .steps {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  .quad {
+    gap: 20px;
+  }
+
   .facts {
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     border-top: 1px solid var(--ink);
     border-bottom: 1px solid var(--line);
   }
@@ -343,8 +370,6 @@ const icons = {
     margin: 0;
     padding: 0;
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     border-top: 1px solid var(--ink);
   }
 
@@ -377,6 +402,42 @@ const icons = {
     max-width: 760px;
     font-size: 17px;
     line-height: 1.65;
+  }
+
+  /* Five cards: three on the first row, two wider ones on the second. */
+  .libs {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .lib {
+    grid-column: span 2;
+  }
+
+  .lib:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+
+  @media (max-width: 1000px) {
+    .libs {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lib,
+    .lib:nth-child(n + 4) {
+      grid-column: auto;
+    }
+
+    .lib:last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .libs {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .lib {

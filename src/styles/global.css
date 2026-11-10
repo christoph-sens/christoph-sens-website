@@ -73,11 +73,15 @@ h3 {
   overflow-wrap: break-word;
 }
 
+/* Only long words are hyphenated: short ones wrap whole (auto hyphenation split "un-der" at 375px). */
 @media (max-width: 600px) {
   h1,
   h2,
   h3 {
     hyphens: auto;
+    hyphenate-limit-chars: 12 4 4;
+    -webkit-hyphenate-limit-before: 4;
+    -webkit-hyphenate-limit-after: 4;
   }
 }
 

@@ -35,6 +35,12 @@ export const routes: Record<PageKey, Record<Lang, string>> = {
   privacy: { en: '/privacy-policy/', de: '/de/datenschutz/', es: '/es/politica-de-privacidad/' },
 };
 
+/** RSS feed of the blog per language. */
+export const feeds: Record<Lang, string> = { en: '/rss.xml', de: '/de/rss.xml', es: '/es/rss.xml' };
+
+/** Preview image for shared links (1200×630), generated from scripts/og-image.html. */
+export const ogImage: Record<Lang, string> = { en: '/og/en.png', de: '/og/de.png', es: '/og/es.png' };
+
 export const email: Record<Lang, string> = {
   de: 'kontakt@christoph-sens.com',
   en: 'contact@christoph-sens.com',
@@ -84,6 +90,8 @@ export const ui = {
       locale: 'de-DE',
     },
     ogLocale: 'de_DE',
+    ogImageAlt: 'Christoph Sens – Backends, die unter Last ruhig bleiben. Kotlin, Java und Spring Boot auf AWS.',
+    jobTitle: 'Freelance Backend Engineer',
   },
   en: {
     navLabel: 'Main navigation',
@@ -123,6 +131,8 @@ export const ui = {
       locale: 'en-GB',
     },
     ogLocale: 'en_US',
+    ogImageAlt: 'Christoph Sens – Backends that stay calm under load. Kotlin, Java and Spring Boot on AWS.',
+    jobTitle: 'Freelance Backend Engineer',
   },
   es: {
     navLabel: 'Navegación principal',
@@ -162,5 +172,7 @@ export const ui = {
       locale: 'es-ES',
     },
     ogLocale: 'es_ES',
+    ogImageAlt: 'Christoph Sens – Backends que mantienen la calma bajo carga. Kotlin, Java y Spring Boot sobre AWS.',
+    jobTitle: 'Freelance Backend Engineer',
   },
 } as const satisfies Record<Lang, unknown>;

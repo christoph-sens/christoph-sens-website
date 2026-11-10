@@ -17,7 +17,13 @@ const blogPath = routes.blog[lang];
 const alternates = await postAlternates(post);
 ---
 
-<BaseLayout lang={lang} alternates={alternates} title={`${title} – Christoph Sens`} description={description}>
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  title={`${title} – Christoph Sens`}
+  description={description}
+  article={{ published: date, modified: updated }}
+>
   <article class="section post">
     <div class="container inner">
       <a class="back" href={blogPath}>← Blog</a>

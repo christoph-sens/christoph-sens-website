@@ -1,0 +1,90 @@
+<!doctype html>
+<!--
+  Template for the link preview images in public/og/ (1200×630). Not part of the site build.
+  Regenerate after changing it (fonts come from node_modules, so run `npm ci` first):
+
+    for lang in en de es; do
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+        --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=3000 \
+        --screenshot="public/og/$lang.png" "file://$PWD/scripts/og-image.html?lang=$lang"
+    done
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Bricolage Grotesque';
+        font-weight: 200 800;
+        src: url('../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        font-weight: 400;
+        src: url('../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 400;
+        src: url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 500;
+        src: url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+      }
+      * { box-sizing: border-box; margin: 0; }
+      body {
+        width: 1200px;
+        height: 630px;
+        padding: 64px 72px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #101418;
+        color: #f2f4f3;
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+      .brand { display: flex; align-items: center; gap: 18px; }
+      .mark {
+        width: 60px; height: 60px; border-radius: 15px;
+        display: grid; place-items: center;
+        background: #f2f4f3; color: #101418;
+        font: 500 23px 'JetBrains Mono', monospace;
+      }
+      .name { font: 700 30px 'Bricolage Grotesque', sans-serif; letter-spacing: -0.01em; }
+      .kicker {
+        display: flex; align-items: center; gap: 16px;
+        font: 400 22px 'JetBrains Mono', monospace; letter-spacing: 0.04em; color: #b8c0c7;
+      }
+      .dot { width: 14px; height: 14px; border-radius: 3px; background: #c2410c; flex: none; }
+      h1 {
+        margin-top: 28px; max-width: 1000px;
+        font: 800 86px/1 'Bricolage Grotesque', sans-serif; letter-spacing: -0.035em;
+      }
+      .foot {
+        display: flex; justify-content: space-between; align-items: center;
+        padding-top: 26px; border-top: 1px solid #262d34;
+        font: 400 22px 'JetBrains Mono', monospace; color: #9aa4ad;
+      }
+      .foot b { font-weight: 500; color: #fdba74; }
+    </style>
+  </head>
+  <body>
+    <div class="brand"><span class="mark">cs</span><span class="name">Christoph Sens</span></div>
+    <div>
+      <div class="kicker"><span class="dot"></span>Freelance Backend Engineer</div>
+      <h1 id="title"></h1>
+    </div>
+    <div class="foot"><span>Kotlin · Java · Spring Boot · AWS</span><b>christoph-sens.com</b></div>
+    <script>
+      // Same headlines as the home page hero (src/data/home.ts).
+      const titles = {
+        en: 'Backends that stay calm under load.',
+        de: 'Backends, die unter Last ruhig bleiben.',
+        es: 'Backends que mantienen la calma bajo carga.',
+      };
+      document.getElementById('title').textContent = titles[new URLSearchParams(location.search).get('lang') ?? 'en'];
+    </script>
+  </body>
+</html>
