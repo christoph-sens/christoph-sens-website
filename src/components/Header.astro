@@ -14,7 +14,7 @@ const isStory = page?.startsWith('story') ?? false;
 const isBlog = Astro.url.pathname.startsWith(routes.blog[lang]);
 
 const links = [
-  { href: routes.home[lang], label: t.nav.home, active: page === 'home' },
+  { href: routes.home[lang], label: t.nav.home, active: page === 'home', home: true },
   { href: routes.services[lang], label: t.nav.services, active: page === 'services' },
   { href: `${routes.home[lang]}#success-stories`, label: t.nav.stories, active: isStory },
   { href: routes.blog[lang], label: t.nav.blog, active: isBlog },
@@ -28,13 +28,15 @@ const links = [
       <span class="brand-name">Christoph Sens</span>
     </a>
     <div class="nav-links">
-      {
-        links.map((l) => (
-          <a href={l.href} class:list={['nav-link', { active: l.active }]} aria-current={l.active ? 'page' : undefined}>
-            {l.label}
-          </a>
-        ))
-      }
+      <div class="nav-pages">
+        {
+          links.map((l) => (
+            <a href={l.href} class:list={['nav-link', { active: l.active, 'nav-home': l.home }]} aria-current={l.active ? 'page' : undefined}>
+              {l.label}
+            </a>
+          ))
+        }
+      </div>
       <span class="lang" aria-label={t.langSwitchLabel}>
         {
           languages.map((l, i) => (
@@ -49,7 +51,10 @@ const links = [
           ))
         }
       </span>
-      <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>{t.navCta}</a>
+      <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>
+        <span class="cta-long">{t.navCta}</span>
+        <span class="cta-short">{t.contact.eyebrow}</span>
+      </a>
     </div>
   </nav>
 </header>
@@ -102,6 +107,13 @@ const links = [
     flex-wrap: wrap;
   }
 
+  .nav-pages {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .nav-link {
     text-decoration: none;
     font-weight: 500;
@@ -143,9 +155,78 @@ const links = [
     font-size: 15px;
   }
 
+  .cta-short {
+    display: none;
+  }
+
+  /* Small screens: brand and language switcher on the first row, page links and a short contact
+     link on the second. The brand already links home, so the home link is dropped. */
   @media (max-width: 760px) {
+    .header {
+      padding-block: 14px 6px;
+    }
+
+    .nav {
+      gap: 2px 12px;
+    }
+
+    .nav-links {
+      display: contents;
+    }
+
+    /* Forces the line break between the two rows. */
+    .nav::before {
+      content: '';
+      flex-basis: 100%;
+      order: 1;
+    }
+
+    .brand {
+      gap: 10px;
+    }
+
+    .brand-name {
+      font-size: 18px;
+    }
+
+    .lang > * {
+      padding-inline: 3px;
+    }
+
+    .lang-sep {
+      padding-inline: 0;
+    }
+
+    .nav-pages {
+      order: 2;
+      gap: 0 18px;
+    }
+
     .nav-link {
+      padding-block: 12px;
+      font-size: 15px;
+    }
+
+    .nav-home,
+    .cta-long {
       display: none;
+    }
+
+    .cta-short {
+      display: inline;
+    }
+
+    .nav .nav-cta,
+    .nav .nav-cta:hover {
+      order: 2;
+      margin-left: auto;
+      min-height: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: var(--accent-hover);
+      font-weight: 600;
     }
   }
 </style>
