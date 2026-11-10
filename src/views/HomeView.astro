@@ -6,7 +6,7 @@ import CodeCard from '../components/CodeCard.astro';
 import StoryCard from '../components/StoryCard.astro';
 import { homePage } from '../data/home';
 import portrait from '../assets/portrait.jpg';
-import { email, external, routes, ui, type Lang } from '../i18n/ui';
+import { external, mailto, routes, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -32,7 +32,7 @@ const icons = {
         <h1 class="display">{t.hero.title}</h1>
         <p class="lead hero-lead">{t.hero.lead}</p>
         <div class="actions">
-          <a class="btn btn-primary" href={`mailto:${email[lang]}`}>{t.hero.primary}<ArrowIcon /></a>
+          <a class="btn btn-primary" href={mailto(lang)}>{t.hero.primary}<ArrowIcon /></a>
           <a class="btn btn-ghost" href="#success-stories">{t.hero.secondary}</a>
         </div>
         <div class="byline">
@@ -135,6 +135,19 @@ const icons = {
           ))
         }
       </ol>
+      <div class="rules">
+        <h3 class="rules-title">{t.process.rules.title}</h3>
+        <ul class="rules-list">
+          {
+            t.process.rules.items.map((r) => (
+              <li>
+                <strong>{r.title}</strong>
+                <span class="muted">{r.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -395,6 +408,57 @@ const icons = {
   .steps p {
     margin: 0;
     line-height: 1.6;
+  }
+
+  .rules {
+    padding: 36px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    gap: 24px 40px;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .rules-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .rules-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 32px;
+  }
+
+  .rules-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1000px) {
+    .rules {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .rules {
+      padding: 28px 24px;
+    }
+
+    .rules-list {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   .os-intro {

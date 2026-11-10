@@ -1,5 +1,5 @@
 ---
-import { email, languages, routes, ui, type Lang, type PageKey } from '../i18n/ui';
+import { languages, mailto, routes, ui, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -51,7 +51,7 @@ const links = [
           ))
         }
       </span>
-      <a class="btn btn-primary nav-cta" href={`mailto:${email[lang]}`}>
+      <a class="btn btn-primary nav-cta" href={mailto(lang)}>
         <span class="cta-long">{t.navCta}</span>
         <span class="cta-short">{t.contact.eyebrow}</span>
       </a>

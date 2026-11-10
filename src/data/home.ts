@@ -14,7 +14,14 @@ export interface HomePage {
     items: { icon: ServiceIcon; title: string; text: string; bullets: string[]; dark?: boolean }[];
     more: string;
   };
-  process: { eyebrow: string; title: string; titleMuted: string; steps: { title: string; text: string }[] };
+  process: {
+    eyebrow: string;
+    title: string;
+    titleMuted: string;
+    steps: { title: string; text: string }[];
+    /** How client code and data are handled when AI is involved. */
+    rules: { title: string; items: { title: string; text: string }[] };
+  };
   openSource: { eyebrow: string; title: string; button: string; intro: string; libs: { group: string; name: string; text: string; href: string }[] };
   stories: { eyebrow: string; title: string; button: string; more: string };
 }
@@ -28,7 +35,7 @@ export const homePage: Record<Lang, HomePage> = {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends, die unter Last ruhig bleiben.',
       lead: 'Ich entwickle Kotlin- und Java-Backends mit Spring Boot auf AWS – KI-gestützt im Tempo, menschlich in Architektur, Review und Verantwortung. Mit über 10 Jahren Erfahrung.',
-      primary: 'Erstgespräch vereinbaren',
+      primary: 'Erstgespräch anfragen',
       secondary: 'Success Stories ansehen',
       codeComment: '// Große Payloads? Landen automatisch in S3.',
     },
@@ -76,11 +83,19 @@ export const homePage: Record<Lang, HomePage> = {
       title: 'KI für das Tempo.',
       titleMuted: 'Ein Mensch für die Verantwortung.',
       steps: [
-        { title: 'Erstgespräch', text: 'Wir klären Ziel, Ausgangslage und Rahmen – unverbindlich und konkret.' },
-        { title: 'Analyse & Architektur', text: 'Ich schaue mir Code und Infrastruktur an und schlage einen klaren Weg vor.' },
-        { title: 'Umsetzung', text: 'In kurzen Iterationen, mit sichtbaren Ergebnissen und sauberem Review.' },
-        { title: 'Übergabe', text: 'Dokumentiert und verständlich, damit Ihr Team selbstständig weitermacht.' },
+        { title: 'Vorgabe', text: 'Mit Ihrem Team kläre ich Ziel, Schnittstellen und Akzeptanzkriterien und lege die Architektur fest.' },
+        { title: 'Umsetzung', text: 'KI schreibt Code, Tests und Boilerplate nach dieser Vorgabe – in kleinen, überprüfbaren Schritten.' },
+        { title: 'Review', text: 'Ich prüfe jede Änderung, bevor sie in Ihr Repository geht. Die Verantwortung dafür trage ich.' },
+        { title: 'Tests & Übergabe', text: 'Automatisierte Tests sichern das Ergebnis ab. Dokumentiert, damit Ihr Team selbstständig weitermacht.' },
       ],
+      rules: {
+        title: 'Ihr Code bleibt Ihr Code.',
+        items: [
+          { title: 'Ihre Regeln gelten', text: 'Welche KI-Werkzeuge im Projekt erlaubt sind, entscheiden Sie. Ich arbeite innerhalb Ihrer Richtlinien.' },
+          { title: 'Nichts ohne Freigabe', text: 'Ohne Ihre Zustimmung geht weder Code noch ein Datensatz an einen KI-Dienst.' },
+          { title: 'Auch ohne KI', text: 'Ist KI im Projekt nicht erwünscht, arbeite ich ohne. Architektur, Review und Verantwortung bleiben gleich.' },
+        ],
+      },
     },
     openSource: {
       eyebrow: '02 — Open Source & Standards',
@@ -111,7 +126,7 @@ export const homePage: Record<Lang, HomePage> = {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends that stay calm under load.',
       lead: 'I build Kotlin and Java backends with Spring Boot on AWS – AI-assisted for speed, human for architecture, review and accountability. With more than 10 years of experience.',
-      primary: 'Book an intro call',
+      primary: 'Request an intro call',
       secondary: 'See success stories',
       codeComment: '// Large payloads? They go to S3 automatically.',
     },
@@ -159,11 +174,19 @@ export const homePage: Record<Lang, HomePage> = {
       title: 'AI for speed.',
       titleMuted: 'A human for accountability.',
       steps: [
-        { title: 'Intro call', text: 'We clarify goals, starting point and scope – concrete and without obligation.' },
-        { title: 'Analysis & architecture', text: 'I review code and infrastructure and propose a clear path forward.' },
-        { title: 'Delivery', text: 'In short iterations, with visible results and thorough review.' },
-        { title: 'Handover', text: 'Documented and easy to follow, so your team can carry on independently.' },
+        { title: 'Specification', text: 'With your team I clarify goals, interfaces and acceptance criteria, and define the architecture.' },
+        { title: 'Implementation', text: 'AI writes code, tests and boilerplate to that specification – in small steps that can be checked.' },
+        { title: 'Review', text: 'I review every change before it reaches your repository. The accountability for it is mine.' },
+        { title: 'Tests & handover', text: 'Automated tests secure the result. Documented, so your team can carry on independently.' },
       ],
+      rules: {
+        title: 'Your code stays your code.',
+        items: [
+          { title: 'Your rules apply', text: 'You decide which AI tools are allowed in the project. I work within your policies.' },
+          { title: 'Nothing without approval', text: 'Without your consent, neither code nor data goes to an AI service.' },
+          { title: 'Without AI, too', text: 'If AI is not wanted in the project, I work without it. Architecture, review and accountability stay the same.' },
+        ],
+      },
     },
     openSource: {
       eyebrow: '02 — Open Source & Standards',
@@ -194,7 +217,7 @@ export const homePage: Record<Lang, HomePage> = {
       eyebrow: 'Freelance Backend Engineer · Kotlin · Java · Spring Boot · AWS',
       title: 'Backends que mantienen la calma bajo carga.',
       lead: 'Desarrollo backends en Kotlin y Java con Spring Boot sobre AWS – con apoyo de IA para la velocidad, con criterio humano para la arquitectura, la revisión y la responsabilidad. Con más de 10 años de experiencia.',
-      primary: 'Concertar una primera llamada',
+      primary: 'Solicitar una primera llamada',
       secondary: 'Ver casos de éxito',
       codeComment: '// ¿Payloads grandes? Van a S3 automáticamente.',
     },
@@ -242,11 +265,19 @@ export const homePage: Record<Lang, HomePage> = {
       title: 'IA para la velocidad.',
       titleMuted: 'Una persona para la responsabilidad.',
       steps: [
-        { title: 'Primera llamada', text: 'Aclaramos objetivos, punto de partida y marco – de forma concreta y sin compromiso.' },
-        { title: 'Análisis y arquitectura', text: 'Reviso el código y la infraestructura y propongo un camino claro.' },
-        { title: 'Implementación', text: 'En iteraciones cortas, con resultados visibles y una revisión cuidadosa.' },
-        { title: 'Traspaso', text: 'Documentado y comprensible, para que su equipo pueda continuar de forma autónoma.' },
+        { title: 'Especificación', text: 'Con su equipo aclaro objetivos, interfaces y criterios de aceptación, y defino la arquitectura.' },
+        { title: 'Implementación', text: 'La IA escribe código, tests y boilerplate según esa especificación – en pasos pequeños y comprobables.' },
+        { title: 'Revisión', text: 'Reviso cada cambio antes de que llegue a su repositorio. La responsabilidad es mía.' },
+        { title: 'Tests y traspaso', text: 'Los tests automatizados aseguran el resultado. Documentado, para que su equipo pueda continuar de forma autónoma.' },
       ],
+      rules: {
+        title: 'Su código sigue siendo suyo.',
+        items: [
+          { title: 'Se aplican sus reglas', text: 'Usted decide qué herramientas de IA se permiten en el proyecto. Trabajo dentro de sus directrices.' },
+          { title: 'Nada sin su aprobación', text: 'Sin su consentimiento, ni el código ni los datos llegan a un servicio de IA.' },
+          { title: 'También sin IA', text: 'Si no se desea IA en el proyecto, trabajo sin ella. La arquitectura, la revisión y la responsabilidad siguen siendo las mismas.' },
+        ],
+      },
     },
     openSource: {
       eyebrow: '02 — Open Source y estándares',

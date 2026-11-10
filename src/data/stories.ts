@@ -87,7 +87,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       ],
       facts: [
         ['70.000', 'Marktdaten im Lasttest in unter einer Minute aggregiert'],
-        ['≈ 10 %', 'des Monolithen abgelöst'],
+        ['100 %', 'des Marktdatenversands laufen über die neuen Anwendungen'],
         ['6', 'Bibliotheken und Anwendungen gebaut'],
       ],
       sections: [
@@ -148,7 +148,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       ],
       facts: [
         ['70,000', 'market data records aggregated in under a minute in a load test'],
-        ['≈ 10%', 'of the monolith replaced'],
+        ['100%', 'of market data sending runs through the new applications'],
         ['6', 'libraries and applications built'],
       ],
       sections: [
@@ -209,7 +209,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       ],
       facts: [
         ['70.000', 'datos de mercado agregados en menos de un minuto en la prueba de carga'],
-        ['≈ 10 %', 'del monolito sustituido'],
+        ['100 %', 'del envío de datos de mercado pasa por las nuevas aplicaciones'],
         ['6', 'librerías y aplicaciones construidas'],
       ],
       sections: [
@@ -268,7 +268,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       glance: [
         ['Aufgabe', 'Die neuen Tarife zum Jahreswechsel im Backend für Abrechnung und Zahlung umsetzen.'],
         ['Lösung', 'Umsetzung im Quarkus-Backend, abgesichert durch automatisierte Tests und ausgerollt über GitLab CI, Terraform und AWS.'],
-        ['Ergebnis', 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten wurde mir die technische Leitung des Teams übertragen.'],
+        ['Ergebnis', 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten verantwortete ich die neuen Schnittstellen für neue Funktionen.'],
       ],
       sections: [
         {
@@ -298,7 +298,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
           eyebrow: 'Ergebnis',
           title: 'Vertrauen, das bleibt',
           blocks: [
-            { type: 'p', html: 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten wurde mir die technische Leitung des Scrum-Teams mit 8 Personen übertragen. In dieser Rolle habe ich neue Schnittstellen für neue Funktionen verantwortet.' },
+            { type: 'p', html: 'Die neuen Tarife waren zum Jahreswechsel umgesetzt. Nach drei Monaten verantwortete ich im Scrum-Team mit 8 Personen die neuen Schnittstellen für neue Funktionen.' },
             { type: 'p', html: 'Parallel haben die Teams eine Lade-App für das Laden zu Hause auf die Beine gestellt.' },
             tariffStack,
           ],
@@ -316,7 +316,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       glance: [
         ['Task', 'Implement the new tariffs in the billing and payment backend in time for the new year.'],
         ['Solution', 'Implemented in the Quarkus backend, covered by automated tests and rolled out with GitLab CI, Terraform and AWS.'],
-        ['Result', 'The new tariffs were in place for the new year. After three months, I was given technical leadership of the team.'],
+        ['Result', 'The new tariffs were in place for the new year. After three months, I was responsible for the new interfaces for new features.'],
       ],
       sections: [
         {
@@ -346,7 +346,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
           eyebrow: 'Result',
           title: 'Trust that lasts',
           blocks: [
-            { type: 'p', html: 'The new tariffs were in place for the new year. After three months, I was given technical leadership of the eight-person Scrum team. In that role, I was responsible for new interfaces for new features.' },
+            { type: 'p', html: 'The new tariffs were in place for the new year. After three months, I was responsible for the new interfaces for new features in the eight-person Scrum team.' },
             { type: 'p', html: 'In parallel, the teams built a charging app for charging at home.' },
             tariffStack,
           ],
@@ -364,7 +364,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
       glance: [
         ['Tarea', 'Implementar las nuevas tarifas en el backend de facturación y pago para el cambio de año.'],
         ['Solución', 'Implementación en el backend con Quarkus, asegurada con tests automatizados y desplegada con GitLab CI, Terraform y AWS.'],
-        ['Resultado', 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses se me confió el liderazgo técnico del equipo.'],
+        ['Resultado', 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses asumí la responsabilidad de las nuevas interfaces para nuevas funciones.'],
       ],
       sections: [
         {
@@ -394,7 +394,7 @@ export const stories: Record<StoryKey, Record<Lang, Story>> = {
           eyebrow: 'Resultado',
           title: 'Una confianza que perdura',
           blocks: [
-            { type: 'p', html: 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses se me confió el liderazgo técnico del equipo Scrum de 8 personas. En ese papel fui responsable de nuevas interfaces para nuevas funciones.' },
+            { type: 'p', html: 'Las nuevas tarifas estaban implementadas para el cambio de año. A los tres meses asumí, en el equipo Scrum de 8 personas, la responsabilidad de las nuevas interfaces para nuevas funciones.' },
             { type: 'p', html: 'En paralelo, los equipos pusieron en marcha una app para cargar en casa.' },
             tariffStack,
           ],
