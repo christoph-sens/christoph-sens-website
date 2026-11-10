@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import portrait from '../assets/portrait.jpg';
 import ArrowIcon from './ArrowIcon.astro';
-import { email, external, ui, type Lang } from '../i18n/ui';
+import { email, external, mailto, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -18,7 +18,7 @@ const t = ui[lang].contact;
     <h2 class="title">{t.title}</h2>
     <p class="text">{t.text}</p>
     <div class="actions">
-      <a class="btn btn-accent" href={`mailto:${email[lang]}`}>{email[lang]}<ArrowIcon /></a>
+      <a class="btn btn-accent" href={mailto(lang)}>{email[lang]}<ArrowIcon /></a>
       <a class="btn btn-ghost-dark" href={external.github}>GitHub</a>
     </div>
     <figure class="person">

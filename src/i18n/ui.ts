@@ -47,6 +47,16 @@ export const email: Record<Lang, string> = {
   es: 'contact@christoph-sens.com',
 };
 
+/** Subject and body the contact buttons put into the new email, so nobody starts from an empty window. */
+const mailDraft: Record<Lang, { subject: string; body: string }> = {
+  de: { subject: 'Anfrage Erstgespräch', body: 'Worum es geht:\n\nZeitrahmen:\n\nSo erreichen Sie mich:\n' },
+  en: { subject: 'Intro call request', body: 'What it is about:\n\nTimeframe:\n\nHow to reach me:\n' },
+  es: { subject: 'Solicitud de primera llamada', body: 'De qué se trata:\n\nPlazo:\n\nCómo contactarme:\n' },
+};
+
+export const mailto = (lang: Lang) =>
+  `mailto:${email[lang]}?subject=${encodeURIComponent(mailDraft[lang].subject)}&body=${encodeURIComponent(mailDraft[lang].body)}`;
+
 export const external = {
   github: 'https://github.com/christoph-sens',
 };
